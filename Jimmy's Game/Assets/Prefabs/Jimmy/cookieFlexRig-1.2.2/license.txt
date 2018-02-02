@@ -1,0 +1,10 @@
+CG Cookie Flexrig 1.2.2
+http://blendercookie.com
+
+
+Description:
+The Cookie Flex Rig was created by Nathan Vegdahl, Beorn Leonard, and Jonathan Williamson, based on an initial design by David Revoy. The rig is designed for maximum flexibility, with numerous controls for body shape, facial features and a small library of clothing and hairstyles. It’s intended to provide a great resource for learning and testing character animation in Blender.
+
+
+License
+http://creativecommons.org/licenses/by/3.0/deed.en_US
