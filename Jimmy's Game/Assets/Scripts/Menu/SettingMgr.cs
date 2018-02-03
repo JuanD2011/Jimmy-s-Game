@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.Audio;
 
 public class SettingMgr : MonoBehaviour {
     public Toggle fullscreenToggle;
@@ -12,7 +13,7 @@ public class SettingMgr : MonoBehaviour {
     public Dropdown vSyncDropdown;
     public Button applyButton;
 
-    public Slider musicVolume;
+    public AudioMixer mAudioMixer;
 
     public Resolution[] resolutions;
     public GameSettings gameSettings;
@@ -69,6 +70,11 @@ public class SettingMgr : MonoBehaviour {
     public void OnApllyButtonClick()
     {
         SaveSettings();
+    }
+
+    public void SetVolume(float _Volume)
+    {
+        mAudioMixer.SetFloat("volume", _Volume);
     }
 
     public void SaveSettings()
