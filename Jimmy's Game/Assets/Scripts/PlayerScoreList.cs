@@ -13,6 +13,7 @@ public class PlayerScoreList : MonoBehaviour
 
     GameObject win;
     GameObject gameOver;
+    GameObject button;
 
     void Start ()
     {
@@ -23,10 +24,13 @@ public class PlayerScoreList : MonoBehaviour
         win = GameObject.Find("WinText");
         win.gameObject.SetActive(false);
 
+        button = GameObject.Find("BackMenu");
+        button.gameObject.SetActive(false);
+
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
 
-        RaceTime.OnJimmyWon += Win;
+        RaceTime.OnJimmyWon += Update;
     }
 	
 	void Update ()
@@ -71,6 +75,7 @@ public class PlayerScoreList : MonoBehaviour
                 {
                     Loose();
                     win.gameObject.SetActive(false);
+                    button.gameObject.SetActive(true);
                 }   
             }
         }
@@ -86,9 +91,10 @@ public class PlayerScoreList : MonoBehaviour
     {
         gameOver.gameObject.SetActive(true);
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            SceneManager.LoadScene("Menu");
-        }
+    }
+
+    public void BackMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
