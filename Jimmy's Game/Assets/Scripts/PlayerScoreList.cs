@@ -13,7 +13,8 @@ public class PlayerScoreList : MonoBehaviour
 
     GameObject win;
     GameObject gameOver;
-    GameObject button;
+    GameObject buttonBackMenu;
+    GameObject nextLevel;
 
     void Start ()
     {
@@ -24,8 +25,11 @@ public class PlayerScoreList : MonoBehaviour
         win = GameObject.Find("WinText");
         win.gameObject.SetActive(false);
 
-        button = GameObject.Find("BackMenu");
-        button.gameObject.SetActive(false);
+        buttonBackMenu = GameObject.Find("BackMenu");
+        buttonBackMenu.gameObject.SetActive(false);
+
+        nextLevel = GameObject.Find("NextLevel");
+        nextLevel.gameObject.SetActive(false);
 
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
@@ -75,7 +79,7 @@ public class PlayerScoreList : MonoBehaviour
                 {
                     Loose();
                     win.gameObject.SetActive(false);
-                    button.gameObject.SetActive(true);
+                    buttonBackMenu.gameObject.SetActive(true);
                 }   
             }
         }
@@ -85,6 +89,8 @@ public class PlayerScoreList : MonoBehaviour
     {
          win.gameObject.SetActive(true);
          Debug.Log("Yeiii");
+
+        nextLevel.gameObject.SetActive(true);
     }
 
     public void Loose()
@@ -96,5 +102,10 @@ public class PlayerScoreList : MonoBehaviour
     public void BackMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Milkyway");
     }
 }

@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 7119fe635ccee2a4489d172fc1d04e30
   - enabled: 1
-    path: Assets/Scenes/Hood Level.unity
-    guid: 00651e1d95950c44ea63e6377613aaf3
+    path: Assets/Scenes/Hood Level 1.unity
+    guid: 8667d530b74e9254386bd4db2864456b
+  - enabled: 1
+    path: Assets/Scenes/Milkyway.unity
+    guid: 69e08af901cfa3d41af51c63914a7abc
