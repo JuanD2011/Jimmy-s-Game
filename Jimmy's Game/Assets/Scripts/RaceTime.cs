@@ -13,11 +13,22 @@ public class RaceTime : MonoBehaviour {
     public float sharedTime = 0f;
     ScoreManager mScoreManager;
 
-    public GameObject scoreBoard;
+    GameObject scoreBoard;
+
+    int i = 0;
+
+    public delegate void OnWin();
+    public static event OnWin JimmyWon;
+
+    //public delegate void ColliderDeactivated();
+   // public static event ColliderDeactivated OnRowBots;
 
     private void Start()
     {
         mScoreManager = GetComponent<ScoreManager>();
+
+        scoreBoard = GameObject.Find("CanvasScoreBoard");
+        scoreBoard.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -38,6 +49,8 @@ public class RaceTime : MonoBehaviour {
             timerText.gameObject.SetActive(false);
             colliderToStart.gameObject.SetActive(false);
 
+            //OnRowBots();
+
             raceTime += Time.deltaTime;
         }
     }
@@ -47,11 +60,47 @@ public class RaceTime : MonoBehaviour {
         
         GameObject collisioned = other.gameObject;
 
-        if (collisioned.tag == "Player")
+        if (collisioned.name == "P1")
+        {
+            sharedTime = raceTime;
+            mScoreManager.ChangeScore("P1", "Time", sharedTime);
+            i++;
+        }
+        if (collisioned.name == "JimmyIddle")
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
+            i++;
         }
-     }
+        if (collisioned.name == "P2")
+        {
+            sharedTime = raceTime;
+            mScoreManager.ChangeScore("P2", "Time", sharedTime);
+            i++;
+        }
+        if (collisioned.name == "P3")
+        {
+            sharedTime = raceTime;
+            mScoreManager.ChangeScore("P3", "Time", sharedTime);
+            i++;
+        }
+        if (collisioned.name == "P5")
+        {
+            sharedTime = raceTime;
+            mScoreManager.ChangeScore("P5", "Time", sharedTime);
+            i++;
+        }
+        if (collisioned.name == "P6")
+        {
+            sharedTime = raceTime;
+            mScoreManager.ChangeScore("P6", "Time", sharedTime);
+            i++;
+        }
 
+        if (i == 6)
+        {
+            scoreBoard.gameObject.SetActive(true);
+            //JimmyWon();
+        }
+    }
 }

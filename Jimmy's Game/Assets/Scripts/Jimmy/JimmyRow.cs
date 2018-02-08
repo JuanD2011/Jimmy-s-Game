@@ -65,7 +65,6 @@ public class JimmyRow : MonoBehaviour
                 leftArrow = true;
                 rightArrow = false;
                 mBody.AddForce(transform.forward * rowMag);
-                Debug.Log("Left");
             }
             else
             {
@@ -83,7 +82,6 @@ public class JimmyRow : MonoBehaviour
                 rightArrow = true;
                 leftArrow = false;
                 mBody.AddForce(transform.forward * rowMag);
-                Debug.Log("Right");
             }
             else
             {
@@ -105,7 +103,6 @@ public class JimmyRow : MonoBehaviour
         penalty = true;
         mBody.AddForce(-transform.forward * penaltyMag);
         mBody.velocity = Vector3.zero;
-        Debug.Log("Penalty");
     }
     
 }

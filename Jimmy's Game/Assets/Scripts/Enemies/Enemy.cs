@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public float jumpMag = 200f;
 
-    bool canRow = true;
+    bool canRow;
 
     bool onAir;
 
@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
 	void Start ()
     {
         mBody = GetComponent<Rigidbody>();
+        canRow = false;
+
+       // RaceTime.OnRowBots += CanRow;
 	}
 	
 	void Update ()
@@ -29,11 +32,16 @@ public class Enemy : MonoBehaviour
         }
 	}
 
+    public void CanRow()
+    {
+        canRow = true;
+    }
+
     void Row()
     {
         if(!onAir)
         {
-            transform.Translate(transform.forward * curSpeed);
+            transform.Translate(transform.forward * curSpeed * -1);
 
             curSpeed += acceleration;
 
@@ -46,7 +54,7 @@ public class Enemy : MonoBehaviour
         {
             transform.Translate(transform.forward * curSpeed);
 
-            curSpeed -= acceleration * 0.6f;
+            curSpeed -= acceleration * 0.2f;
 
             if (curSpeed > maxSpeed)
             {

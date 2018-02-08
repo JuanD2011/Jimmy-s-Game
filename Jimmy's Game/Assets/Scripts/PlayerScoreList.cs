@@ -10,12 +10,19 @@ public class PlayerScoreList : MonoBehaviour
 
     int lastChangeCounter;
 
-	void Start ()
-    {
-        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
+    GameObject win;
 
+    void Start ()
+    {
+
+        win = GameObject.Find("WinText");
+        win.gameObject.SetActive(false);
+
+        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
-	}
+
+        RaceTime.JimmyWon += Win;
+    }
 	
 	void Update ()
     {
@@ -42,12 +49,25 @@ public class PlayerScoreList : MonoBehaviour
 
         string[] names = scoreManager.GetPlayerNames("Time");
 
-        foreach (string name in names)
+        for (int i = 0; i < names.Length; i++)
         {
             GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
             go.transform.SetParent(this.transform);
-            go.transform.Find("TextUsername").GetComponent<Text>().text = name;
-            go.transform.Find("TextTime").GetComponent<Text>().text = scoreManager.GetScore(name, "Time").ToString();
+            go.transform.Find("TextUsername").GetComponent<Text>().text = names[i];
+            go.transform.Find("TextTime").GetComponent<Text>().text = scoreManager.GetScore(names[i], "Time").ToString();
+
+            if (i == 5)
+            {
+                if (names[0] == "Jimmy")
+                {
+                    Win();
+                }   
+            }
         }
+    }
+
+    public void Win()
+    {
+         win.gameObject.SetActive(true);
     }
 }

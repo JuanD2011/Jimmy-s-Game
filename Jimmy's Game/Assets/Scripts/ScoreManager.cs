@@ -78,6 +78,7 @@ public class ScoreManager : MonoBehaviour
         Init();
 
         return playerScores.Keys.OrderBy(n => GetScore(n, sortingScoreType)).ToArray();
+
     }
 
     public int GetChangeCounter()
@@ -85,8 +86,4 @@ public class ScoreManager : MonoBehaviour
         return changeCounter;
     }
 
-    public void SetTimeScore()
-    {
-        ChangeScore("Jimmy", "Time", 3f);
-    }
 }
