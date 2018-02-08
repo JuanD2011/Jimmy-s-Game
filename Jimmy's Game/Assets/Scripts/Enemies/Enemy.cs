@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         {
             transform.Translate(transform.forward * curSpeed);
 
-            curSpeed -= acceleration * 0.8f;
+            curSpeed -= acceleration * 0.6f;
 
             if (curSpeed > maxSpeed)
             {
