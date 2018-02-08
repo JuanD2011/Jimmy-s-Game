@@ -1532,6 +1532,7 @@ ModelImporter:
     2100024: clothes3
     2100026: shoes_1
     2100028: shoes_2
+    2100030: hair
     2300000: clothes-dress_belt
     2300002: clothes_dress1
     2300004: clothes_dress2
@@ -1623,6 +1624,10 @@ ModelImporter:
     2300176: WGT-thumb_03
     2300178: WGT-toe
     2300180: WGT-tongue
+    2300182: clothes_pants_short1
+    2300184: clothes_shirt_short1
+    2300186: hair_short2
+    2300188: shoes_sneaker
     3300000: clothes-dress_belt
     3300002: clothes_dress1
     3300004: clothes_dress2
@@ -1714,6 +1719,10 @@ ModelImporter:
     3300176: WGT-thumb_03
     3300178: WGT-toe
     3300180: WGT-tongue
+    3300182: clothes_pants_short1
+    3300184: clothes_shirt_short1
+    3300186: hair_short2
+    3300188: shoes_sneaker
     4300000: WGT-colours
     4300002: WGT-face_variants
     4300004: WGT-body_variants
@@ -1857,6 +1866,10 @@ ModelImporter:
     13700040: WGT-upper_arm_L
     13700042: WGT-upper_arm_R
     13700044: WGT-upper_leg
+    13700046: clothes_pants_long1
+    13700048: clothes_shirt_short2
+    13700050: hair_bald
+    13700052: shoes_slipper
   externalObjects: {}
   materials:
     importMaterials: 1

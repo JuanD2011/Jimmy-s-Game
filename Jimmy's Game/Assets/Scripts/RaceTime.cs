@@ -20,8 +20,8 @@ public class RaceTime : MonoBehaviour {
     public delegate void OnWin();
     public static event OnWin OnJimmyWon;
 
-    //public delegate void ColliderDeactivated();
-   // public static event ColliderDeactivated OnRowBots;
+    public delegate void ColliderDeactivated();
+    public static event ColliderDeactivated OnRowBots;
 
     private void Start()
     {
@@ -49,7 +49,7 @@ public class RaceTime : MonoBehaviour {
             timerText.gameObject.SetActive(false);
             colliderToStart.gameObject.SetActive(false);
 
-            //OnRowBots();
+            OnRowBots();
 
             raceTime += Time.deltaTime;
         }

@@ -5,8 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     float curSpeed = 0.0f;
-    public float maxSpeed = 10.0f;
+    public float maxSpeedmin;
+    public float maxSpeedmax;
     public float acceleration = 1.0f;
+
+    float maxSpeed;
 
     public float jumpMag = 200f;
 
@@ -21,7 +24,11 @@ public class Enemy : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
 
-       // RaceTime.OnRowBots += CanRow;
+        RaceTime.OnRowBots += CanRow;
+
+        maxSpeed = Random.Range(maxSpeedmin, maxSpeedmax);
+
+        Debug.Log(maxSpeed);
 	}
 	
 	void Update ()
@@ -41,7 +48,7 @@ public class Enemy : MonoBehaviour
     {
         if(!onAir)
         {
-            transform.Translate(transform.forward * curSpeed * -1);
+            transform.Translate(transform.forward * curSpeed);
 
             curSpeed += acceleration;
 
@@ -61,16 +68,13 @@ public class Enemy : MonoBehaviour
                 curSpeed = maxSpeed;
             }       
         }
-
-        Debug.Log("Speed: " + curSpeed);
     }
 
     void Jump()
     {
-        Debug.Log("Jumping");
         mBody.AddForce(transform.up * jumpMag);
     }
-
+/*
     private void OnTriggerEnter(Collider other)
     {
         GameObject triggered = other.gameObject;
@@ -81,7 +85,7 @@ public class Enemy : MonoBehaviour
             Collider triggeredCollider = triggered.GetComponent<Collider>();
             triggeredCollider.enabled = false;
         }
-    }
+    }*/
 
     private void OnCollisionExit(Collision collision)
     {
@@ -100,6 +104,13 @@ public class Enemy : MonoBehaviour
         if (collisioned.tag == "Water")
         {
             onAir = false;
+        }
+
+        if (collisioned.tag == "Obstacle")
+        {
+            Jump();
+            Collider triggeredCollider = collisioned.GetComponent<Collider>();
+            triggeredCollider.enabled = false;
         }
     }
 }
