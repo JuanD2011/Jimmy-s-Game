@@ -11,12 +11,13 @@ public class RaceTime : MonoBehaviour {
     public float timeCountDown = 3f;
     public float raceTime = 0f;
     public float sharedTime = 0f;
-    //ScoreManager mScoreManager;
+    ScoreManager mScoreManager;
 
     public GameObject scoreBoard;
 
     private void Start()
     {
+        mScoreManager = GetComponent<ScoreManager>();
     }
 
     private void Update()
@@ -41,7 +42,7 @@ public class RaceTime : MonoBehaviour {
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         
         GameObject collisioned = other.gameObject;
@@ -51,6 +52,6 @@ public class RaceTime : MonoBehaviour {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
         }
-     }*/
+     }
 
 }
