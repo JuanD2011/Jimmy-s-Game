@@ -11,15 +11,9 @@ public class RaceTime : MonoBehaviour {
     public float timeCountDown = 3f;
     public float raceTime = 0f;
     public float sharedTime = 0f;
-    ScoreManager mScoreManager;
+    //ScoreManager mScoreManager;
 
     public GameObject scoreBoard;
-
-    public string playerOne = "P1";
-    public string playerTwo = "P2";
-    public string playerThree = "P3";
-    public string playerFive = "P5";
-    public string playerSix = "P6";
 
     private void Start()
     {
@@ -28,9 +22,6 @@ public class RaceTime : MonoBehaviour {
     private void Update()
     {
         TimesUp();
-
-        raceTime += Time.deltaTime;
-
     }
 
     public void TimesUp()
@@ -44,8 +35,9 @@ public class RaceTime : MonoBehaviour {
         if (timeCountDown < 0)
         {
             timerText.gameObject.SetActive(false);
-
             colliderToStart.gameObject.SetActive(false);
+
+            raceTime += Time.deltaTime;
         }
     }
 
@@ -54,49 +46,11 @@ public class RaceTime : MonoBehaviour {
         
         GameObject collisioned = other.gameObject;
 
-        if (collisioned.name == playerOne)
+        if (collisioned.tag == "Player")
         {
             sharedTime = raceTime;
-
-            mScoreManager.SetScore(playerOne, "Time", sharedTime);
-            i++;
+            mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
         }
+     }*/
 
-        if (collisioned.name == playerTwo)
-        {
-            sharedTime = raceTime;
-
-            mScoreManager.SetScore(playerTwo, "Time", sharedTime);
-            i++;
-        }
-
-        if (collisioned.name == playerThree)
-        {
-            sharedTime = raceTime;
-
-            mScoreManager.SetScore(playerThree, "Time", sharedTime);
-            i++;
-        }
-
-        if (collisioned.name == playerFive)
-        {
-            sharedTime = raceTime;
-
-            mScoreManager.SetScore(playerFive, "Time", sharedTime);
-            i++;
-        }
-        if (collisioned.name == playerSix)
-        {
-            sharedTime = raceTime;
-
-            mScoreManager.SetScore(playerSix, "Time", sharedTime);
-            i++;
-        }
-        if (collisioned.name == "JimmyIddle")
-        {
-            sharedTime = raceTime;
-            mScoreManager.SetScore("Jimmy", "Time", sharedTime);
-            i ++;
-        }
-    }*/
 }
