@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScoreList : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class PlayerScoreList : MonoBehaviour
     int lastChangeCounter;
 
     GameObject win;
+    GameObject gameOver;
 
     void Start ()
     {
+
+        gameOver = GameObject.Find("GameOver");
+        gameOver.gameObject.SetActive(false);
 
         win = GameObject.Find("WinText");
         win.gameObject.SetActive(false);
@@ -21,7 +26,7 @@ public class PlayerScoreList : MonoBehaviour
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
 
-        RaceTime.JimmyWon += Win;
+        RaceTime.OnJimmyWon += Win;
     }
 	
 	void Update ()
@@ -61,6 +66,11 @@ public class PlayerScoreList : MonoBehaviour
                 if (names[0] == "Jimmy")
                 {
                     Win();
+                }
+                else
+                {
+                    Loose();
+                    win.gameObject.SetActive(false);
                 }   
             }
         }
@@ -69,5 +79,16 @@ public class PlayerScoreList : MonoBehaviour
     public void Win()
     {
          win.gameObject.SetActive(true);
+         Debug.Log("Yeiii");
+    }
+
+    public void Loose()
+    {
+        gameOver.gameObject.SetActive(true);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            SceneManager.LoadScene("Menu");
+        }
     }
 }
