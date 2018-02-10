@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
-public class RaceTime : MonoBehaviour {
-
-    public Text timerText;
+public class RaceTime : MonoBehaviour
+{
+    //Race time
+    GameObject countDown;
     public GameObject colliderToStart;
-
+    public Text timerText;
     public float timeCountDown = 3f;
     public float raceTime = 0f;
     public float sharedTime = 0f;
-    ScoreManager mScoreManager;
 
+    //Score
+    ScoreManager mScoreManager;
     GameObject scoreBoard;
 
-    int i = 0;
+    //Tutorial
+    VideoPlayer videoTut;
 
+    //PlayerCount
+    int i = 0;
+   
+    //Events 
     public delegate void OnWin();
     public static event OnWin OnJimmyWon;
 
@@ -29,29 +37,50 @@ public class RaceTime : MonoBehaviour {
 
         scoreBoard = GameObject.Find("CanvasScoreBoard");
         scoreBoard.gameObject.SetActive(false);
+
+        videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
+
+        countDown = GameObject.Find("TextCountDown");
+        countDown.gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        TutorialComplete();
         TimesUp();
+    }
+
+    public void TutorialComplete()
+    {
+        videoTut.Play();
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            videoTut.gameObject.SetActive(false);
+        }
     }
 
     public void TimesUp()
     {
-        if (timeCountDown < 4f && timeCountDown > -1f)
+        if (videoTut.gameObject.activeInHierarchy == false)
         {
-            timeCountDown -= Time.deltaTime;
+            countDown.gameObject.SetActive(true);
 
-            timerText.text = timeCountDown.ToString("0");
-        }
-        if (timeCountDown < 0)
-        {
-            timerText.gameObject.SetActive(false);
-            colliderToStart.gameObject.SetActive(false);
+            if (timeCountDown < 4f && timeCountDown > -1f)
+            {
+                timeCountDown -= Time.deltaTime;
 
-            OnRowBots();
+                timerText.text = timeCountDown.ToString("0");
+            }
+            if (timeCountDown < 0)
+            {
+                timerText.gameObject.SetActive(false);
+                colliderToStart.gameObject.SetActive(false);
 
-            raceTime += Time.deltaTime;
+                OnRowBots();
+
+                raceTime += Time.deltaTime;
+            }
         }
     }
 

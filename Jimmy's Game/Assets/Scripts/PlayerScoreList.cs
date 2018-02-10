@@ -87,19 +87,25 @@ public class PlayerScoreList : MonoBehaviour
 
     public void Win()
     {
-         win.gameObject.SetActive(true);
-         Debug.Log("Yeiii");
+        win.gameObject.SetActive(true);
+        Debug.Log("Yeiii");
 
-        nextLevel.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Milkyway");
+        }
     }
 
     public void Loose()
     {
-        gameOver.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("Menu");
+        }
 
     }
 
-    public void BackMenu()
+    /*public void BackMenu()
     {
         SceneManager.LoadScene("Menu");
     }
@@ -107,5 +113,5 @@ public class PlayerScoreList : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene("Milkyway");
-    }
+    }*/
 }
