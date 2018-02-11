@@ -8,9 +8,13 @@ public class JimmyJump : MonoBehaviour
     bool canJump;
     public float jumpForce = 200f;
 
+    AudioSource splashWater;
+
 	void Start ()
     {
-        mBody = GetComponent<Rigidbody>();	
+        mBody = GetComponent<Rigidbody>();
+
+        splashWater = GameObject.Find("SplashAudio").GetComponent<AudioSource>();
 	}
 	
 	void Update ()
@@ -37,6 +41,7 @@ public class JimmyJump : MonoBehaviour
         if(collisioned.tag == "Water")
         {
             canJump = true;
+            splashWater.Play();
         }
     }
 
