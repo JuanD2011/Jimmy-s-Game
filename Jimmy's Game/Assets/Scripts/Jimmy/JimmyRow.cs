@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JimmyRow : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class JimmyRow : MonoBehaviour
     AudioSource stone;
     AudioSource can;
 
+    Scene mScene = new Scene();
 
     bool CanRow
     {
@@ -45,11 +47,12 @@ public class JimmyRow : MonoBehaviour
         penaltyTime = 2f;
 
         //Audios
-
-        frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
-        stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
-        can = GameObject.Find("CanSound").GetComponent<AudioSource>();
-
+        if (mScene.name == "Hood Level 1")
+        {
+            frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
+            stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
+            can = GameObject.Find("CanSound").GetComponent<AudioSource>();
+        }
     }
 	
 	void Update ()
@@ -123,18 +126,21 @@ public class JimmyRow : MonoBehaviour
     {
         GameObject collisioned = collision.gameObject;
 
-        if (collisioned.tag == "Frog")
+        if (mScene.name == "Hood Level 1")
         {
-            frog.Play();
-        }
+            if (collisioned.tag == "Frog")
+            {
+                frog.Play();
+            }
 
-        if (collisioned.tag == "Stone")
-        {
-            stone.Play();
-        }
-        if (collisioned.tag == "JerryCan")
-        {
-            can.Play();
+            if (collisioned.tag == "Stone")
+            {
+                stone.Play();
+            }
+            if (collisioned.tag == "JerryCan")
+            {
+                can.Play();
+            }
         }
     }
 

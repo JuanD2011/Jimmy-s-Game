@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JimmyJump : MonoBehaviour
 {
@@ -10,11 +11,16 @@ public class JimmyJump : MonoBehaviour
 
     AudioSource splashWater;
 
+    Scene mScene = new Scene();
+
 	void Start ()
     {
         mBody = GetComponent<Rigidbody>();
 
-        splashWater = GameObject.Find("SplashAudio").GetComponent<AudioSource>();
+        if (mScene.name == "Hood Level 1")
+        {
+            splashWater = GameObject.Find("SplashAudio").GetComponent<AudioSource>();
+        }
 	}
 	
 	void Update ()
@@ -41,7 +47,11 @@ public class JimmyJump : MonoBehaviour
         if(collisioned.tag == "Water")
         {
             canJump = true;
-            splashWater.Play();
+
+            if (mScene.name == "Hood Level 1")
+            {
+                splashWater.Play();
+            }
         }
     }
 

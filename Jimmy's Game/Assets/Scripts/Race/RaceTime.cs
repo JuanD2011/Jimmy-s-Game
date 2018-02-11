@@ -48,7 +48,7 @@ public class RaceTime : MonoBehaviour
         scoreBoard.gameObject.SetActive(false);
 
         if(mScene.name == "Hood Level 1")
-        videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
+            videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
 
         countDown = GameObject.Find("TextCountDown");
         countDown.gameObject.SetActive(false);
@@ -81,12 +81,13 @@ public class RaceTime : MonoBehaviour
             if (videoTut.gameObject.activeInHierarchy == false)
             {
                 countDown.gameObject.SetActive(true);
-                //countDownAudio.Play();
+                countDownAudio.Play();
 
                 if (timeCountDown < 4f && timeCountDown > -1f)
                 {
                     timeCountDown -= Time.deltaTime;
                     timerText.text = timeCountDown.ToString("0");
+                    
                 }
                 if (timeCountDown < 0)
                 {
