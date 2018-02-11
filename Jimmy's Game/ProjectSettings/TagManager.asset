@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Water
   - Obstacle
+  - Frog
+  - Stone
+  - JerryCan
   layers:
   - Default
   - TransparentFX

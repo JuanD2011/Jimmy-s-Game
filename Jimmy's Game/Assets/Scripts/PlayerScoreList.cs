@@ -13,8 +13,8 @@ public class PlayerScoreList : MonoBehaviour
 
     GameObject win;
     GameObject gameOver;
-    GameObject buttonBackMenu;
-    GameObject nextLevel;
+
+    Scene mScene;
 
     void Start ()
     {
@@ -24,12 +24,6 @@ public class PlayerScoreList : MonoBehaviour
 
         win = GameObject.Find("WinText");
         win.gameObject.SetActive(false);
-
-        buttonBackMenu = GameObject.Find("BackMenu");
-        buttonBackMenu.gameObject.SetActive(false);
-
-        nextLevel = GameObject.Find("NextLevel");
-        nextLevel.gameObject.SetActive(false);
 
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
@@ -67,7 +61,7 @@ public class PlayerScoreList : MonoBehaviour
             GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
             go.transform.SetParent(this.transform);
             go.transform.Find("TextUsername").GetComponent<Text>().text = names[i];
-            go.transform.Find("TextTime").GetComponent<Text>().text = scoreManager.GetScore(names[i], "Time").ToString();
+            go.transform.Find("TextTime").GetComponent<Text>().text = scoreManager.GetScore(names[i], "Time").ToString("0.00");
 
             if (i == 5)
             {
@@ -79,7 +73,6 @@ public class PlayerScoreList : MonoBehaviour
                 {
                     Loose();
                     win.gameObject.SetActive(false);
-                    buttonBackMenu.gameObject.SetActive(true);
                 }   
             }
         }
@@ -89,29 +82,25 @@ public class PlayerScoreList : MonoBehaviour
     {
         win.gameObject.SetActive(true);
         Debug.Log("Yeiii");
-
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
+            //mScene = SceneManager.GetActiveScene();
+            Debug.Log("Fui cambiao de level");
             SceneManager.LoadScene("Milkyway");
+
+            /*if (mScene.buildIndex == 0)
+            {
+                SceneManager.GetSceneAt(1);
+            }*/
         }
     }
 
     public void Loose()
     {
+        gameOver.gameObject.SetActive(true);
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Menu");
         }
-
     }
-
-    /*public void BackMenu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
-
-    public void NextLevel()
-    {
-        SceneManager.LoadScene("Milkyway");
-    }*/
 }

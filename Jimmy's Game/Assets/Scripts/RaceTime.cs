@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 public class RaceTime : MonoBehaviour
 {
@@ -31,13 +33,18 @@ public class RaceTime : MonoBehaviour
     public delegate void ColliderDeactivated();
     public static event ColliderDeactivated OnRowBots;
 
+    //Scenes
+    Scene mScene;
+
     private void Start()
     {
+        mScene = SceneManager.GetActiveScene();
         mScoreManager = GetComponent<ScoreManager>();
 
         scoreBoard = GameObject.Find("CanvasScoreBoard");
         scoreBoard.gameObject.SetActive(false);
 
+        if(mScene.name == "Hood Level 1")
         videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
 
         countDown = GameObject.Find("TextCountDown");
@@ -46,7 +53,9 @@ public class RaceTime : MonoBehaviour
 
     private void Update()
     {
-        TutorialComplete();
+        if (mScene.name == "Hood Level 1")
+            TutorialComplete();
+
         TimesUp();
     }
 
@@ -62,10 +71,32 @@ public class RaceTime : MonoBehaviour
 
     public void TimesUp()
     {
-        if (videoTut.gameObject.activeInHierarchy == false)
+        if (mScene.name == "Hood Level 1")
+        {
+            if (videoTut.gameObject.activeInHierarchy == false)
+            {
+                countDown.gameObject.SetActive(true);
+
+                if (timeCountDown < 4f && timeCountDown > -1f)
+                {
+                    timeCountDown -= Time.deltaTime;
+
+                    timerText.text = timeCountDown.ToString("0");
+                }
+                if (timeCountDown < 0)
+                {
+                    timerText.gameObject.SetActive(false);
+                    colliderToStart.gameObject.SetActive(false);
+
+                    OnRowBots();
+
+                    raceTime += Time.deltaTime;
+                }
+            }
+        }
+        else
         {
             countDown.gameObject.SetActive(true);
-
             if (timeCountDown < 4f && timeCountDown > -1f)
             {
                 timeCountDown -= Time.deltaTime;
@@ -82,6 +113,7 @@ public class RaceTime : MonoBehaviour
                 raceTime += Time.deltaTime;
             }
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)

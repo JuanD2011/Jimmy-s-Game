@@ -18,6 +18,13 @@ public class JimmyRow : MonoBehaviour
     public float penaltyMag = 100f;
     public float rowMag = 100f;
 
+    //Audios
+
+    AudioSource frog;
+    AudioSource stone;
+    AudioSource can;
+
+
     bool CanRow
     {
         get
@@ -36,7 +43,14 @@ public class JimmyRow : MonoBehaviour
         canRow = true;
         penalty = false;
         penaltyTime = 2f;
-	}
+
+        //Audios
+
+        frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
+        stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
+        can = GameObject.Find("CanSound").GetComponent<AudioSource>();
+
+    }
 	
 	void Update ()
     {       
@@ -104,5 +118,24 @@ public class JimmyRow : MonoBehaviour
         mBody.AddForce(-transform.forward * penaltyMag);
         mBody.velocity = Vector3.zero;
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject collisioned = collision.gameObject;
+
+        if (collisioned.tag == "Frog")
+        {
+            frog.Play();
+        }
+
+        if (collisioned.tag == "Stone")
+        {
+            stone.Play();
+        }
+        if (collisioned.tag == "JerryCan")
+        {
+            can.Play();
+        }
+    }
+
 }
