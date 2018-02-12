@@ -8,13 +8,40 @@ public class JimmyJump : MonoBehaviour
     Rigidbody mBody;
     bool canJump;
     public float jumpForce = 200f;
-
+    bool onAir;
+    bool canJumpInit;
     AudioSource splashWater;
 
     Scene mScene = new Scene();
 
+    public bool OnAir
+    {
+        get
+        {
+            return onAir;
+        }
+        set
+        {
+            onAir = value;
+        }
+    }
+
+    public bool CanJumpInit
+    {
+        get
+        {
+            return canJumpInit;
+        }
+        set
+        {
+            canJumpInit = value;
+        }
+    }
+
 	void Start ()
     {
+        canJumpInit = false;
+
         mBody = GetComponent<Rigidbody>();
 
         if (mScene.name == "Hood Level 1")
@@ -25,7 +52,7 @@ public class JimmyJump : MonoBehaviour
 	
 	void Update ()
     {
-		if(canJump)
+		if(canJump && canJumpInit)
         {
             Jump();
         }
@@ -35,8 +62,8 @@ public class JimmyJump : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            mBody.AddForce(transform.up * jumpForce);
-            mBody.AddForce(-transform.forward * 150f);
+            mBody.AddForce(Vector3.up * jumpForce);
+            //mBody.AddForce(-Vector3.forward * 150f);
         }
     }
 
@@ -47,6 +74,7 @@ public class JimmyJump : MonoBehaviour
         if(collisioned.tag == "Water")
         {
             canJump = true;
+            onAir = false;
 
             if (mScene.name == "Hood Level 1")
             {
@@ -62,6 +90,7 @@ public class JimmyJump : MonoBehaviour
         if(collisioned.tag == "Water")
         {
             canJump = false;
+            onAir = true;
         }
     }
 }

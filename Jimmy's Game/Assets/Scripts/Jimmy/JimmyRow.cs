@@ -19,6 +19,8 @@ public class JimmyRow : MonoBehaviour
     public float penaltyMag = 100f;
     public float rowMag = 100f;
 
+    Animator mAnimator;
+
     //Audios
 
     AudioSource frog;
@@ -27,7 +29,7 @@ public class JimmyRow : MonoBehaviour
 
     Scene mScene = new Scene();
 
-    bool CanRow
+    public bool CanRow
     {
         get
         {
@@ -39,12 +41,17 @@ public class JimmyRow : MonoBehaviour
         }
     }
 
+    JimmyJump jimmyJump;
+
     void Start ()
     {
         mBody = GetComponent<Rigidbody>();
-        canRow = true;
+        canRow = false;
         penalty = false;
         penaltyTime = 2f;
+        jimmyJump = GetComponent<JimmyJump>();
+
+        mAnimator = GetComponent<Animator>();
 
         //Audios
         if (mScene.name == "Hood Level 1")
@@ -56,13 +63,16 @@ public class JimmyRow : MonoBehaviour
     }
 	
 	void Update ()
-    {       
-        if(canRow && !penalty)
+    {
+        if(!jimmyJump.OnAir)
         {
-            Row();
-        }
+            if (canRow && !penalty)
+            {
+                Row();
+            }
+        }  
 
-		if(penalty)
+        if (penalty)
         {
             time += Time.deltaTime;
             penalty = false;
@@ -77,6 +87,8 @@ public class JimmyRow : MonoBehaviour
     {
         if(Input.GetKeyDown("left"))
         {
+            mAnimator.SetInteger("Row", -1);
+
             if(!leftArrow)
             {
                 leftArrow = true;
@@ -94,6 +106,7 @@ public class JimmyRow : MonoBehaviour
 
         if (Input.GetKeyDown("right"))
         {
+            mAnimator.SetInteger("Row", 1);
             if (!rightArrow)
             {
                 rightArrow = true;
