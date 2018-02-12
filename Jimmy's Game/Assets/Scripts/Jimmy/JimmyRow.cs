@@ -81,7 +81,7 @@ public class JimmyRow : MonoBehaviour
             {
                 leftArrow = true;
                 rightArrow = false;
-                mBody.AddForce(transform.forward * rowMag);
+                mBody.AddForce(Vector3.forward * rowMag);
             }
             else
             {
@@ -98,7 +98,7 @@ public class JimmyRow : MonoBehaviour
             {
                 rightArrow = true;
                 leftArrow = false;
-                mBody.AddForce(transform.forward * rowMag);
+                mBody.AddForce(Vector3.forward * rowMag);
             }
             else
             {
@@ -118,7 +118,7 @@ public class JimmyRow : MonoBehaviour
     void Penalty()
     {
         penalty = true;
-        mBody.AddForce(-transform.forward * penaltyMag);
+        mBody.AddForce(-Vector3.forward * penaltyMag);
         mBody.velocity = Vector3.zero;
     }
 

@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     {
         if(!onAir)
         {
-            transform.Translate(transform.forward * curSpeed);
+            transform.Translate(Vector3.forward * curSpeed);
 
             curSpeed += acceleration;
 
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
         }
         if(onAir)
         {
-            transform.Translate(transform.forward * curSpeed);
+            transform.Translate(Vector3.forward * curSpeed);
 
             curSpeed -= acceleration * 0.2f;
 
