@@ -9,6 +9,9 @@ TagManager:
   - Frog
   - Stone
   - JerryCan
+  - SpaceSuit
+  - Asteroid
+  - RadioTelescope
   layers:
   - Default
   - TransparentFX
