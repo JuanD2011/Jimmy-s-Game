@@ -94,6 +94,11 @@ public class RaceTime : MonoBehaviour
                     timerText.gameObject.SetActive(false);
                     colliderToStart.gameObject.SetActive(false);
 
+                    JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
+                    jimmyRow.CanRow = true;
+                    JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
+                    jimmyJump.CanJumpInit = true;
+
                     OnRowBots();
 
                     raceTime += Time.deltaTime;
