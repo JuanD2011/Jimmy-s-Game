@@ -13,14 +13,20 @@ public class Enemy : MonoBehaviour
 
     public float jumpMag = 200f;
 
-    bool canRow;
+    static bool canRow;
 
     bool onAir;
 
     Rigidbody mBody;
 
+    Animator mAnimator;
+
 	void Start ()
     {
+        mAnimator = GetComponent<Animator>();
+
+        mAnimator.SetInteger("Row", 0);
+
         mBody = GetComponent<Rigidbody>();
         canRow = false;
 
@@ -36,12 +42,14 @@ public class Enemy : MonoBehaviour
 		if(canRow)
         {
             Row();
+            mAnimator.SetInteger("Row", 1);
         }
 	}
 
     public void CanRow()
     {
         canRow = true;
+
     }
 
     void Row()
@@ -74,18 +82,6 @@ public class Enemy : MonoBehaviour
     {
         mBody.AddForce(transform.up * jumpMag);
     }
-/*
-    private void OnTriggerEnter(Collider other)
-    {
-        GameObject triggered = other.gameObject;
-
-        if(triggered.tag == "Obstacle")
-        {
-            Jump();
-            Collider triggeredCollider = triggered.GetComponent<Collider>();
-            triggeredCollider.enabled = false;
-        }
-    }*/
 
     private void OnCollisionExit(Collision collision)
     {
