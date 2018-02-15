@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     public float jumpMag = 200f;
 
-    static bool canRow;
+    bool canRow;
 
     bool onAir;
 
@@ -35,7 +35,8 @@ public class Enemy : MonoBehaviour
         maxSpeed = Random.Range(maxSpeedmin, maxSpeedmax);
 
         Debug.Log(maxSpeed);
-	}
+        RaceTime.OnEnemiesFinish += Finish;
+    }
 	
 	void Update ()
     {
@@ -43,6 +44,10 @@ public class Enemy : MonoBehaviour
         {
             Row();
             mAnimator.SetInteger("Row", 1);
+        }
+        if(!canRow)
+        {
+            mAnimator.SetInteger("Row", 0);
         }
 	}
 
@@ -65,6 +70,7 @@ public class Enemy : MonoBehaviour
                 curSpeed = maxSpeed;
             }           
         }
+        
         if(onAir)
         {
             transform.Translate(Vector3.forward * curSpeed);
@@ -76,6 +82,7 @@ public class Enemy : MonoBehaviour
                 curSpeed = maxSpeed;
             }       
         }
+        
     }
 
     void Jump()
@@ -108,5 +115,11 @@ public class Enemy : MonoBehaviour
             Collider triggeredCollider = collisioned.GetComponent<Collider>();
             triggeredCollider.enabled = false;
         }
+    }
+
+    void Finish()
+    {
+        Debug.Log("Yuujuuu");
+        canRow = false;
     }
 }

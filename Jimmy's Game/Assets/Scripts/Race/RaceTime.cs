@@ -33,6 +33,13 @@ public class RaceTime : MonoBehaviour
     public delegate void ColliderDeactivated();
     public static event ColliderDeactivated OnRowBots;
 
+    public delegate void FinishLine();
+    public static event FinishLine OnJimmyFinish;
+
+    public delegate void EnemiesFinish();
+    public static event EnemiesFinish OnEnemiesFinish;
+
+
     //Scenes
     Scene mScene;
 
@@ -61,7 +68,7 @@ public class RaceTime : MonoBehaviour
         if (mScene.name == "Hood Level 1")
             TutorialComplete();
 
-        TimesUp();
+        TimesUp();   
     }
 
     public void TutorialComplete()
@@ -147,6 +154,7 @@ public class RaceTime : MonoBehaviour
             sharedTime = raceTime;
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
             i++;
+            OnJimmyFinish();
         }
         if (collisioned.name == "P2")
         {
@@ -175,6 +183,7 @@ public class RaceTime : MonoBehaviour
 
         if (i == 6)
         {
+            OnEnemiesFinish();
             scoreBoard.gameObject.SetActive(true);
             OnJimmyWon();
         }

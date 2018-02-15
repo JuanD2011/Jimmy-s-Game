@@ -16,7 +16,7 @@ public class JimmyRow : MonoBehaviour
 
     bool firstTime;
 
-    public float penaltyMag = 100f;
+    public float penaltyMag = 150f;
     public float rowMag = 100f;
 
     Animator mAnimator;
@@ -54,10 +54,12 @@ public class JimmyRow : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
-        penaltyTime = 2f;
+        penaltyTime = 1f;
         jimmyJump = GetComponent<JimmyJump>();
 
         mAnimator = GetComponent<Animator>();
+
+        RaceTime.OnJimmyFinish += Finish;
 
         //Audios
         if (mScene.name == "Hood Level 1")
@@ -88,12 +90,13 @@ public class JimmyRow : MonoBehaviour
         if (penalty)
         {
             time += Time.deltaTime;
-            penalty = false;
         }
         if(time >= penaltyTime)
         {
             time = 0;
+            penalty = false;
         }
+
     }
 
     void Row()
@@ -157,15 +160,58 @@ public class JimmyRow : MonoBehaviour
             if (collisioned.tag == "Frog")
             {
                 frog.Play();
+                if(collision.relativeVelocity.z != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
+                if (collision.relativeVelocity.y != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
             }
-
             if (collisioned.tag == "Stone")
             {
                 stone.Play();
+                if (collision.relativeVelocity.z != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
+                if (collision.relativeVelocity.y > 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
             }
             if (collisioned.tag == "JerryCan")
             {
                 can.Play();
+                if (collision.relativeVelocity.z != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
+                if (collision.relativeVelocity.y != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
+            }
+            if(collisioned.tag == "Obstacle")
+            {
+                if (collision.relativeVelocity.z != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
+                
+                if (collision.relativeVelocity.y != 0)
+                {
+                    collisioned.SetActive(false);
+                    Penalty();
+                }
             }
         }
 
@@ -185,6 +231,12 @@ public class JimmyRow : MonoBehaviour
                 radioTele.Play();
             }
         }
+    }
+
+    void Finish()
+    {
+        canRow = false;
+        mAnimator.SetInteger("Row", 0);
     }
 
 }
