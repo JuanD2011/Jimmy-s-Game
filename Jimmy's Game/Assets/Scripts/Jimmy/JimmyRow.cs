@@ -27,7 +27,11 @@ public class JimmyRow : MonoBehaviour
     AudioSource stone;
     AudioSource can;
 
-    Scene mScene = new Scene();
+    AudioSource asteroid;
+    AudioSource spaceSuit;
+    AudioSource radioTele;
+
+    Scene mScene;
 
     public bool CanRow
     {
@@ -45,6 +49,8 @@ public class JimmyRow : MonoBehaviour
 
     void Start ()
     {
+        mScene = SceneManager.GetActiveScene();
+
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
@@ -59,6 +65,13 @@ public class JimmyRow : MonoBehaviour
             frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
             stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
             can = GameObject.Find("CanSound").GetComponent<AudioSource>();
+        }
+
+        if (mScene.name == "Milkyway")
+        {
+            asteroid = GameObject.Find("Asteroid").GetComponent<AudioSource>();
+            spaceSuit = GameObject.Find("SpaceSuit").GetComponent<AudioSource>();
+            radioTele = GameObject.Find("RadioTelescope").GetComponent<AudioSource>();
         }
     }
 	
@@ -153,6 +166,23 @@ public class JimmyRow : MonoBehaviour
             if (collisioned.tag == "JerryCan")
             {
                 can.Play();
+            }
+        }
+
+        if (mScene.name == "Milkyway")
+        {
+            if (collisioned.tag == "Asteroid")
+            {
+                asteroid.Play();
+            }
+
+            if (collisioned.tag == "SpaceSuit")
+            {
+                spaceSuit.Play();
+            }
+            if (collisioned.tag == "RadioTelescope")
+            {
+                radioTele.Play();
             }
         }
     }

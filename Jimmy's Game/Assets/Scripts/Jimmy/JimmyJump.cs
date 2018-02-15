@@ -10,9 +10,12 @@ public class JimmyJump : MonoBehaviour
     public float jumpForce = 200f;
     bool onAir;
     bool canJumpInit;
-    AudioSource splashWater;
 
-    Scene mScene = new Scene();
+
+    Scene mScene;
+
+    AudioSource splashWater;
+    AudioSource jumpSound;
 
     public bool OnAir
     {
@@ -40,6 +43,8 @@ public class JimmyJump : MonoBehaviour
 
 	void Start ()
     {
+        mScene = SceneManager.GetActiveScene();
+
         canJumpInit = false;
 
         mBody = GetComponent<Rigidbody>();
@@ -48,6 +53,8 @@ public class JimmyJump : MonoBehaviour
         {
             splashWater = GameObject.Find("SplashAudio").GetComponent<AudioSource>();
         }
+
+        jumpSound = GameObject.Find("Jump").GetComponent<AudioSource>();
 	}
 	
 	void Update ()
@@ -91,6 +98,8 @@ public class JimmyJump : MonoBehaviour
         {
             canJump = false;
             onAir = true;
+
+            jumpSound.Play();
         }
     }
 }
