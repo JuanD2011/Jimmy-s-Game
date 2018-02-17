@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
 
 public class RaceTime : MonoBehaviour
 {
@@ -115,6 +114,7 @@ public class RaceTime : MonoBehaviour
         else
         {
             countDown.gameObject.SetActive(true);
+            
 
             if (timeCountDown < 4f && timeCountDown > -1f)
             {

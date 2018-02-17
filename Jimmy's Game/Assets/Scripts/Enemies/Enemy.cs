@@ -119,7 +119,6 @@ public class Enemy : MonoBehaviour
 
     void Finish()
     {
-        Debug.Log("Yuujuuu");
         canRow = false;
     }
 }
