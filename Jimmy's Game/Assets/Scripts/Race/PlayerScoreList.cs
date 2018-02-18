@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerScoreList : MonoBehaviour
 {
@@ -14,7 +13,10 @@ public class PlayerScoreList : MonoBehaviour
     GameObject win;
     GameObject gameOver;
 
-    Scene mScene;
+
+    public delegate void ChangeLevel();
+    public static event ChangeLevel OnWin;
+    public static event ChangeLevel OnLoose;
 
     void Start ()
     {
@@ -28,7 +30,6 @@ public class PlayerScoreList : MonoBehaviour
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
 
-        RaceTime.OnJimmyWon += Update;
     }
 	
 	void Update ()
@@ -67,40 +68,16 @@ public class PlayerScoreList : MonoBehaviour
             {
                 if (names[0] == "Jimmy")
                 {
-                    Win();
+                    OnWin();
+                    win.gameObject.SetActive(true);
                 }
                 else
                 {
-                    Loose();
+                    OnLoose();
                     win.gameObject.SetActive(false);
+                    gameOver.gameObject.SetActive(true);
                 }   
             }
-        }
-    }
-
-    public void Win()
-    {
-        win.gameObject.SetActive(true);
-        Debug.Log("Yeiii");
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            //mScene = SceneManager.GetActiveScene();
-            Debug.Log("Fui cambiao de level");
-            SceneManager.LoadScene("Milkyway");
-
-            /*if (mScene.buildIndex == 0)
-            {
-                SceneManager.GetSceneAt(1);
-            }*/
-        }
-    }
-
-    public void Loose()
-    {
-        gameOver.gameObject.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("Menu");
         }
     }
 }

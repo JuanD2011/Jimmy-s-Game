@@ -26,8 +26,6 @@ public class RaceTime : MonoBehaviour
     int i = 0;
    
     //Events 
-    public delegate void OnWin();
-    public static event OnWin OnJimmyWon;
 
     public delegate void ColliderDeactivated();
     public static event ColliderDeactivated OnRowBots;
@@ -185,7 +183,6 @@ public class RaceTime : MonoBehaviour
         {
             OnEnemiesFinish();
             scoreBoard.gameObject.SetActive(true);
-            OnJimmyWon();
         }
     }
 }
