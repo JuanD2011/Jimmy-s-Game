@@ -11,11 +11,12 @@ public class JimmyJump : MonoBehaviour
     bool onAir;
     bool canJumpInit;
 
-
     Scene mScene;
 
     AudioSource splashWater;
     AudioSource jumpSound;
+
+    JimmyRow jimmyRow;
 
     public bool OnAir
     {
@@ -44,6 +45,8 @@ public class JimmyJump : MonoBehaviour
 	void Start ()
     {
         mScene = SceneManager.GetActiveScene();
+
+        jimmyRow = GetComponent<JimmyRow>();
 
         canJumpInit = false;
 
@@ -82,7 +85,7 @@ public class JimmyJump : MonoBehaviour
         {
             canJump = true;
             onAir = false;
-
+            
             if (mScene.name == "Hood Level 1")
             {
                 splashWater.Play();
@@ -98,6 +101,7 @@ public class JimmyJump : MonoBehaviour
         {
             canJump = false;
             onAir = true;
+            jimmyRow.FirstAssigned = false;
 
             jumpSound.Play();
         }

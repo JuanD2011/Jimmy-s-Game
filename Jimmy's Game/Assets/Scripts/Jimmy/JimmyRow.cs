@@ -10,11 +10,12 @@ public class JimmyRow : MonoBehaviour
     float penaltyTime;
     bool penalty;
     float time = 0f;
+    public float constForce = 0.01f;
 
     bool leftArrow;
     bool rightArrow;
 
-    bool firstTime;
+    bool firstAssigned;
 
     public float penaltyMag = 150f;
     public float rowMag = 100f;
@@ -45,6 +46,18 @@ public class JimmyRow : MonoBehaviour
         }
     }
 
+    public bool FirstAssigned
+    {
+        get
+        {
+            return firstAssigned;
+        }
+        set
+        {
+            firstAssigned = value;
+        }
+    }
+
     JimmyJump jimmyJump;
 
     void Start ()
@@ -54,8 +67,10 @@ public class JimmyRow : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
-        penaltyTime = 1f;
+        penaltyTime = 0.5f;
         jimmyJump = GetComponent<JimmyJump>();
+
+        firstAssigned = false;
 
         mAnimator = GetComponent<Animator>();
 
@@ -79,13 +94,41 @@ public class JimmyRow : MonoBehaviour
 	
 	void Update ()
     {
-        if(!jimmyJump.OnAir)
+        if(canRow && !jimmyJump.OnAir && !penalty)
         {
-            if (canRow && !penalty)
+            int firstKey = 0;
+
+            if(!firstAssigned)
+            {
+                firstKey = GetFirstKey();
+
+                switch (firstKey)
+                {
+                    case -1:
+                        leftArrow = true;
+                        rightArrow = false;
+                        break;
+                    case 1:
+                        rightArrow = true;
+                        leftArrow = false;
+                        break;
+                    case 0:
+                        firstKey = GetFirstKey();
+                        break;
+                }
+                firstAssigned = true;
+            }
+            else
             {
                 Row();
-            }
-        }  
+            }        
+        }
+        
+
+        if(canRow && !jimmyJump.OnAir)
+        {
+            mBody.AddForce(Vector3.forward * constForce);
+        }
 
         if (penalty)
         {
@@ -147,8 +190,8 @@ public class JimmyRow : MonoBehaviour
     void Penalty()
     {
         penalty = true;
+        firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
-        mBody.velocity = Vector3.zero;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -160,58 +203,14 @@ public class JimmyRow : MonoBehaviour
             if (collisioned.tag == "Frog")
             {
                 frog.Play();
-                if(collision.relativeVelocity.z != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
-                if (collision.relativeVelocity.y != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
             }
             if (collisioned.tag == "Stone")
             {
                 stone.Play();
-                if (collision.relativeVelocity.z != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
-                if (collision.relativeVelocity.y > 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
             }
             if (collisioned.tag == "JerryCan")
             {
                 can.Play();
-                if (collision.relativeVelocity.z != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
-                if (collision.relativeVelocity.y != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
-            }
-            if(collisioned.tag == "Obstacle")
-            {
-                if (collision.relativeVelocity.z != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
-                
-                if (collision.relativeVelocity.y != 0)
-                {
-                    collisioned.SetActive(false);
-                    Penalty();
-                }
             }
         }
 
@@ -232,11 +231,31 @@ public class JimmyRow : MonoBehaviour
             }
         }
     }
-
+    
     void Finish()
     {
         canRow = false;
         mAnimator.SetInteger("Row", 0);
+    }
+
+    int GetFirstKey()
+    {
+        int firstkey = 0;
+
+        if(Input.GetKeyDown("left"))
+        {
+            firstkey = -1;
+            mBody.AddForce(Vector3.forward * rowMag);
+        }
+        if(Input.GetKeyDown("right"))
+        {
+            firstkey = 1;
+            mBody.AddForce(Vector3.forward * rowMag);
+        }
+
+        firstAssigned = true;
+
+        return firstkey;
     }
 
 }
