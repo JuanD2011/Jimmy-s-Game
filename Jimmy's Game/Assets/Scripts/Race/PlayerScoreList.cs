@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScoreList : MonoBehaviour
 {
@@ -13,10 +14,8 @@ public class PlayerScoreList : MonoBehaviour
     GameObject win;
     GameObject gameOver;
 
-
     public delegate void ChangeLevel();
     public static event ChangeLevel OnWin;
-    public static event ChangeLevel OnLoose;
 
     void Start ()
     {
@@ -73,7 +72,11 @@ public class PlayerScoreList : MonoBehaviour
                 }
                 else
                 {
-                    OnLoose();
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Debug.Log("Fui cambiao de level");
+                        SceneManager.LoadScene("Menu");
+                    }
                     win.gameObject.SetActive(false);
                     gameOver.gameObject.SetActive(true);
                 }   

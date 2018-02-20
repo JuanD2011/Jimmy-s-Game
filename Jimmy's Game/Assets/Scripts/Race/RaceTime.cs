@@ -9,7 +9,6 @@ public class RaceTime : MonoBehaviour
 {
     //Race time
     GameObject countDown;
-    public GameObject colliderToStart;
     public Text timerText;
     public float timeCountDown = 3f;
     public float raceTime = 0f;
@@ -42,6 +41,9 @@ public class RaceTime : MonoBehaviour
 
     //Audio
     AudioSource countDownAudio;
+    AudioSource finishing;
+
+    int audioCount = 0;
 
     private void Start()
     {
@@ -58,6 +60,8 @@ public class RaceTime : MonoBehaviour
         countDown.gameObject.SetActive(false);
 
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
+        finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
+
     }
 
     private void Update()
@@ -65,16 +69,25 @@ public class RaceTime : MonoBehaviour
         if (mScene.name == "Hood Level 1")
             TutorialComplete();
 
-        TimesUp();   
+        TimesUp();
+
+
     }
 
     public void TutorialComplete()
     {
+        
         videoTut.Play();
 
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
+            audioCount += 1;
             videoTut.gameObject.SetActive(false);
+
+            if (audioCount <= 1)
+            {
+                countDownAudio.Play();
+            }
         }
     }
 
@@ -85,7 +98,6 @@ public class RaceTime : MonoBehaviour
             if (videoTut.gameObject.activeInHierarchy == false)
             {
                 countDown.gameObject.SetActive(true);
-                countDownAudio.Play();
 
                 if (timeCountDown < 4f && timeCountDown > -1f)
                 {
@@ -96,7 +108,6 @@ public class RaceTime : MonoBehaviour
                 if (timeCountDown < 0)
                 {
                     timerText.gameObject.SetActive(false);
-                    colliderToStart.gameObject.SetActive(false);
 
                     JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
                     jimmyRow.CanRow = true;
@@ -112,8 +123,6 @@ public class RaceTime : MonoBehaviour
         else
         {
             countDown.gameObject.SetActive(true);
-            
-
             if (timeCountDown < 4f && timeCountDown > -1f)
             {
                 timeCountDown -= Time.deltaTime;
@@ -122,7 +131,6 @@ public class RaceTime : MonoBehaviour
             if (timeCountDown < 0)
             {
                 timerText.gameObject.SetActive(false);
-                colliderToStart.gameObject.SetActive(false);
 
                 JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
                 jimmyRow.CanRow = true;
@@ -140,12 +148,14 @@ public class RaceTime : MonoBehaviour
     {
         
         GameObject collisioned = other.gameObject;
+        finishing.Play();
 
         if (collisioned.name == "P1")
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P1", "Time", sharedTime);
             i++;
+
         }
         if (collisioned.name == "JimmyIddle")
         {
