@@ -77,7 +77,7 @@ public class JimmyRow : MonoBehaviour
         RaceTime.OnJimmyFinish += Finish;
 
         //Audios
-        if (mScene.name == "Hood Level 1")
+        /*if (mScene.name == "Hood Level 1")
         {
             frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
             stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
@@ -89,7 +89,7 @@ public class JimmyRow : MonoBehaviour
             asteroid = GameObject.Find("Asteroid").GetComponent<AudioSource>();
             spaceSuit = GameObject.Find("SpaceSuit").GetComponent<AudioSource>();
             radioTele = GameObject.Find("RadioTelescope").GetComponent<AudioSource>();
-        }
+        }*/
     }
 	
 	void Update ()
@@ -194,7 +194,7 @@ public class JimmyRow : MonoBehaviour
         mBody.AddForce(-Vector3.forward * penaltyMag);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         GameObject collisioned = collision.gameObject;
 
@@ -230,7 +230,7 @@ public class JimmyRow : MonoBehaviour
                 radioTele.Play();
             }
         }
-    }
+    }*/
     
     void Finish()
     {

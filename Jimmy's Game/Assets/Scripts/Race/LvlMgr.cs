@@ -11,7 +11,6 @@ public class LvlMgr : MonoBehaviour
     private void Start()
     {
         mScene = SceneManager.GetActiveScene();
-        PlayerScoreList.OnWin += ChangeWinLevel;
 
     }
 
@@ -21,12 +20,19 @@ public class LvlMgr : MonoBehaviour
 
     public void ChangeWinLevel()
     {
-        Debug.Log("Yeiii");
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+        if (mScene.name == "Hood Level 1")
         {
-            Debug.Log("Fui cambiao de level");
+            SceneManager.LoadScene("WorldLevel");
+        }
+        if (mScene.name == "WorldLevel")
+        {
             SceneManager.LoadScene("Milkyway");
         }
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
 }

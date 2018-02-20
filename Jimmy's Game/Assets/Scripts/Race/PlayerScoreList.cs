@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerScoreList : MonoBehaviour
 {
@@ -14,12 +13,11 @@ public class PlayerScoreList : MonoBehaviour
     GameObject win;
     GameObject gameOver;
 
-    public delegate void ChangeLevel();
-    public static event ChangeLevel OnWin;
+    GameObject winButton;
+    GameObject gameOverButton;
 
     void Start ()
     {
-
         gameOver = GameObject.Find("GameOver");
         gameOver.gameObject.SetActive(false);
 
@@ -29,9 +27,14 @@ public class PlayerScoreList : MonoBehaviour
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
 
+        winButton = GameObject.Find("WinButton");
+        winButton.gameObject.SetActive(false);
+
+        gameOverButton = GameObject.Find("GameOverButton");
+        gameOverButton.gameObject.SetActive(false);
     }
-	
-	void Update ()
+
+    void Update ()
     {
         if (scoreManager == null)
         {
@@ -67,18 +70,13 @@ public class PlayerScoreList : MonoBehaviour
             {
                 if (names[0] == "Jimmy")
                 {
-                    OnWin();
                     win.gameObject.SetActive(true);
+                    winButton.gameObject.SetActive(true);
                 }
                 else
                 {
-                    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
-                    {
-                        Debug.Log("Fui cambiao de level");
-                        SceneManager.LoadScene("Menu");
-                    }
-                    win.gameObject.SetActive(false);
                     gameOver.gameObject.SetActive(true);
+                    gameOverButton.gameObject.SetActive(true);
                 }   
             }
         }
