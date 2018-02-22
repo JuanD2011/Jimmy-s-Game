@@ -14,6 +14,9 @@ public class RaceTime : MonoBehaviour
     public float raceTime = 0f;
     public float sharedTime = 0f;
 
+    GameObject goddy;
+    GameObject goddyText;
+
     //Score
     ScoreManager mScoreManager;
     GameObject scoreBoard;
@@ -62,6 +65,15 @@ public class RaceTime : MonoBehaviour
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
         finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
 
+
+        if (mScene.name == "GoddyLevel")
+        {
+            goddy = GameObject.Find("P1");
+            goddyText = GameObject.Find("TextGoddy");
+
+            goddyText.gameObject.SetActive(false);
+        }
+
     }
 
     private void Update()
@@ -70,7 +82,6 @@ public class RaceTime : MonoBehaviour
             TutorialComplete();
 
         TimesUp();
-
 
     }
 
@@ -168,6 +179,12 @@ public class RaceTime : MonoBehaviour
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
             i++;
             OnJimmyFinish();
+
+            if (mScene.name == "GoddyLevel")
+            {
+                goddy.gameObject.SetActive(false);
+                goddyText.gameObject.SetActive(true);
+            }
         }
         if (collisioned.name == "P2")
         {
