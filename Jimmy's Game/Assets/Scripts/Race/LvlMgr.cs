@@ -32,6 +32,10 @@ public class LvlMgr : MonoBehaviour
         {
             SceneManager.LoadScene("Milkyway");
         }
+        if (mScene.name == "Milkyway")
+        {
+            SceneManager.LoadScene("GoddyLevel");
+        }
     }
 
     public void BackToMenu()

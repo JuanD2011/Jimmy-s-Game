@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/NationalLevel.unity
+- path: Assets/Scenes/GoddyLevel.unity
   isLoaded: 1
   isActive: 1

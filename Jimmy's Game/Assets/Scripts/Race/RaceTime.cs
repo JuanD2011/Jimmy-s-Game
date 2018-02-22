@@ -156,6 +156,11 @@ public class RaceTime : MonoBehaviour
             mScoreManager.ChangeScore("P1", "Time", sharedTime);
             i++;
 
+            if (mScene.name == "GoddyLevel")
+            {
+                SceneManager.LoadScene("Menu");
+            }
+
         }
         if (collisioned.name == "JimmyIddle")
         {
@@ -188,7 +193,6 @@ public class RaceTime : MonoBehaviour
             mScoreManager.ChangeScore("P6", "Time", sharedTime);
             i++;
         }
-
         if (i == 6)
         {
             OnEnemiesFinish();

@@ -18,7 +18,6 @@ public class ScoreManager : MonoBehaviour
         SetScore("Jimmy", "Time", 0f);
         SetScore("P5", "Time", 0f);
         SetScore("P6", "Time", 0f);
-
     }
 
     void Init()
