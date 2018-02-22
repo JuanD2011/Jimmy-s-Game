@@ -52,7 +52,7 @@ public class JimmyJump : MonoBehaviour
 
         mBody = GetComponent<Rigidbody>();
 
-        if (mScene.name == "Hood Level 1")
+        if (mScene.name == "Hood Level 1" || mScene.name == "NationalLevel" || mScene.name == "WorldLevel")
         {
             splashWater = GameObject.Find("SplashAudio").GetComponent<AudioSource>();
         }
@@ -86,7 +86,7 @@ public class JimmyJump : MonoBehaviour
             canJump = true;
             onAir = false;
             
-            if (mScene.name == "Hood Level 1")
+            if (mScene.name == "Hood Level 1" || mScene.name == "NationalLevel" || mScene.name == "WorldLevel")
             {
                 splashWater.Play();
             }

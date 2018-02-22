@@ -22,6 +22,10 @@ public class LvlMgr : MonoBehaviour
     {
         if (mScene.name == "Hood Level 1")
         {
+            SceneManager.LoadScene("NationalLevel");
+        }
+        if (mScene.name == "NationalLevel")
+        {
             SceneManager.LoadScene("WorldLevel");
         }
         if (mScene.name == "WorldLevel")
