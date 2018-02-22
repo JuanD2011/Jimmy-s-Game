@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Milkyway.unity
+- path: Assets/Scenes/WorldLevel.unity
   isLoaded: 1
   isActive: 1

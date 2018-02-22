@@ -238,7 +238,7 @@ public class JimmyRow : MonoBehaviour
     void Finish()
     {
         canRow = false;
-        mAnimator.SetInteger("Row", 0);
+        //mAnimator.SetInteger("Row", 0);
     }
 
     int GetFirstKey()
@@ -280,10 +280,12 @@ public class JimmyRow : MonoBehaviour
     void Buff()
     {
         mBody.AddForce(Vector3.forward * buffMag);
+        Debug.Log("Buff");
     }
 
     void Debuff()
     {
         mBody.AddForce(-Vector3.forward * debuffMag);
+        Debug.Log("Debuff");
     }
 }

@@ -12,6 +12,8 @@ TagManager:
   - SpaceSuit
   - Asteroid
   - RadioTelescope
+  - Buff
+  - Debuff
   layers:
   - Default
   - TransparentFX
