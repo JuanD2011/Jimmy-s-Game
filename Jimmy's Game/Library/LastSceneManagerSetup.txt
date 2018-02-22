@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/GoddyLevel.unity
+- path: Assets/Scenes/Milkyway.unity
   isLoaded: 1
   isActive: 1
