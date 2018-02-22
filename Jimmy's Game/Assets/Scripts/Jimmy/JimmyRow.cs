@@ -20,6 +20,9 @@ public class JimmyRow : MonoBehaviour
     public float penaltyMag = 150f;
     public float rowMag = 100f;
 
+    public float buffMag = 100f;
+    public float debuffMag = 300f;
+
     Animator mAnimator;
 
     //Audios
@@ -258,4 +261,29 @@ public class JimmyRow : MonoBehaviour
         return firstkey;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject triggered = other.gameObject;
+
+        if(triggered.tag == "Buff")
+        {
+            Buff();
+            triggered.SetActive(false);
+        }
+        if(triggered.tag == "Debuff")
+        {
+            Debuff();
+            triggered.SetActive(false);
+        }
+    }
+
+    void Buff()
+    {
+        mBody.AddForce(Vector3.forward * buffMag);
+    }
+
+    void Debuff()
+    {
+        mBody.AddForce(-Vector3.forward * debuffMag);
+    }
 }
