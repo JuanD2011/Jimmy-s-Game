@@ -27,13 +27,7 @@ public class JimmyRow : MonoBehaviour
 
     //Audios
 
-    AudioSource frog;
-    AudioSource stone;
-    AudioSource can;
 
-    AudioSource asteroid;
-    AudioSource spaceSuit;
-    AudioSource radioTele;
 
     Scene mScene;
 
@@ -70,7 +64,7 @@ public class JimmyRow : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
-        penaltyTime = 0.5f;
+        penaltyTime = 0.1f;
         jimmyJump = GetComponent<JimmyJump>();
 
         firstAssigned = false;
@@ -78,21 +72,6 @@ public class JimmyRow : MonoBehaviour
         mAnimator = GetComponent<Animator>();
 
         RaceTime.OnJimmyFinish += Finish;
-
-        //Audios
-        /*if (mScene.name == "Hood Level 1")
-        {
-            frog = GameObject.Find("FrogSound").GetComponent<AudioSource>();
-            stone = GameObject.Find("StoneSound").GetComponent<AudioSource>();
-            can = GameObject.Find("CanSound").GetComponent<AudioSource>();
-        }
-
-        if (mScene.name == "Milkyway")
-        {
-            asteroid = GameObject.Find("Asteroid").GetComponent<AudioSource>();
-            spaceSuit = GameObject.Find("SpaceSuit").GetComponent<AudioSource>();
-            radioTele = GameObject.Find("RadioTelescope").GetComponent<AudioSource>();
-        }*/
     }
 	
 	void Update ()
@@ -128,11 +107,11 @@ public class JimmyRow : MonoBehaviour
         }
         
 
-        if(canRow && !jimmyJump.OnAir)
+        if(canRow)
         {
             mBody.AddForce(Vector3.forward * constForce);
         }
-
+        
         if (penalty)
         {
             time += Time.deltaTime;
@@ -183,11 +162,12 @@ public class JimmyRow : MonoBehaviour
                 }
             }
         }
-
+        /*
         if(Input.GetKeyDown("right") && Input.GetKeyDown("left"))
         {
             Penalty();
         }
+        */
     }
     
     void Penalty()
@@ -195,45 +175,8 @@ public class JimmyRow : MonoBehaviour
         penalty = true;
         firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
+        Debug.Log("Penalty");
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        GameObject collisioned = collision.gameObject;
-
-        if (mScene.name == "Hood Level 1")
-        {
-            if (collisioned.tag == "Frog")
-            {
-                frog.Play();
-            }
-            if (collisioned.tag == "Stone")
-            {
-                stone.Play();
-            }
-            if (collisioned.tag == "JerryCan")
-            {
-                can.Play();
-            }
-        }
-
-        if (mScene.name == "Milkyway")
-        {
-            if (collisioned.tag == "Asteroid")
-            {
-                asteroid.Play();
-            }
-
-            if (collisioned.tag == "SpaceSuit")
-            {
-                spaceSuit.Play();
-            }
-            if (collisioned.tag == "RadioTelescope")
-            {
-                radioTele.Play();
-            }
-        }
-    }*/
     
     void Finish()
     {
