@@ -14,6 +14,8 @@ public class RaceTime : MonoBehaviour
     public float raceTime = 0f;
     public float sharedTime = 0f;
 
+    GameObject lvlPresent;
+
     GameObject goddy;
     GameObject goddyText;
 
@@ -65,6 +67,7 @@ public class RaceTime : MonoBehaviour
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
         finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
 
+        lvlPresent = GameObject.Find("LevelPresentation");
 
         if (mScene.name == "GoddyLevel")
         {
@@ -133,26 +136,40 @@ public class RaceTime : MonoBehaviour
         }
         else
         {
-            countDown.gameObject.SetActive(true);
-            if (timeCountDown < 4f && timeCountDown > -1f)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
             {
-                timeCountDown -= Time.deltaTime;
-                timerText.text = timeCountDown.ToString("0");
+                audioCount += 1;
+                lvlPresent.gameObject.SetActive(false);
+
+                if (audioCount <= 1)
+                {
+                    countDownAudio.Play();
+                }
             }
-            if (timeCountDown < 0)
+
+            if (lvlPresent.activeInHierarchy == false)
             {
-                timerText.gameObject.SetActive(false);
+                countDown.gameObject.SetActive(true);
 
-                JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
-                jimmyRow.CanRow = true;
-                JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
-                jimmyJump.CanJumpInit = true;
+                if (timeCountDown < 4f && timeCountDown > -1f)
+                {
+                    timeCountDown -= Time.deltaTime;
+                    timerText.text = timeCountDown.ToString("0");
+                }
+                if (timeCountDown < 0)
+                {
+                    timerText.gameObject.SetActive(false);
 
-                OnRowBots();
-                raceTime += Time.deltaTime;
+                    JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
+                    jimmyRow.CanRow = true;
+                    JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
+                    jimmyJump.CanJumpInit = true;
+
+                    OnRowBots();
+                    raceTime += Time.deltaTime;
+                }
             }
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -216,4 +233,5 @@ public class RaceTime : MonoBehaviour
             scoreBoard.gameObject.SetActive(true);
         }
     }
+
 }

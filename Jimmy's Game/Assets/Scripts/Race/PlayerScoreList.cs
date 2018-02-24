@@ -11,16 +11,15 @@ public class PlayerScoreList : MonoBehaviour
     int lastChangeCounter;
 
     GameObject win;
-    GameObject gameOver;
 
     GameObject winButton;
     GameObject gameOverButton;
+    GameObject gameOverBg;
+
+    int i = 0;
 
     void Start ()
     {
-        gameOver = GameObject.Find("GameOver");
-        gameOver.gameObject.SetActive(false);
-
         win = GameObject.Find("WinText");
         win.gameObject.SetActive(false);
 
@@ -32,6 +31,9 @@ public class PlayerScoreList : MonoBehaviour
 
         gameOverButton = GameObject.Find("GameOverButton");
         gameOverButton.gameObject.SetActive(false);
+
+        gameOverBg = GameObject.Find("GameOverBG");
+        gameOverBg.gameObject.SetActive(false);
     }
 
     void Update ()
@@ -75,9 +77,24 @@ public class PlayerScoreList : MonoBehaviour
                 }
                 else
                 {
-                    gameOver.gameObject.SetActive(true);
                     gameOverButton.gameObject.SetActive(true);
+                   // OnGO();
                 }   
+            }
+        }
+    }
+
+    public void OnGO()
+    {
+        gameOverBg.gameObject.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            i++;
+            Debug.Log(i);
+            if (i == 1)
+            {
+                gameOverBg.gameObject.SetActive(false);
             }
         }
     }
