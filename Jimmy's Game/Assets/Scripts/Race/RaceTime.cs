@@ -9,6 +9,7 @@ public class RaceTime : MonoBehaviour
 {
     //Race time
     GameObject countDown;
+    GameObject goText;
     public Text timerText;
     public float timeCountDown = 3f;
     public float raceTime = 0f;
@@ -47,6 +48,7 @@ public class RaceTime : MonoBehaviour
     //Audio
     AudioSource countDownAudio;
     AudioSource finishing;
+    AudioSource music;
 
     int audioCount = 0;
 
@@ -58,16 +60,23 @@ public class RaceTime : MonoBehaviour
         scoreBoard = GameObject.Find("CanvasScoreBoard");
         scoreBoard.gameObject.SetActive(false);
 
-        if(mScene.name == "Hood Level 1")
+        lvlPresent = GameObject.Find("LevelPresentation");
+        
+
+        if (mScene.name == "Hood Level 1")
+        {
             videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
+        }
 
         countDown = GameObject.Find("TextCountDown");
         countDown.gameObject.SetActive(false);
 
+        goText = GameObject.Find("TextGO");
+        goText.gameObject.SetActive(false);
+
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
         finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
-
-        lvlPresent = GameObject.Find("LevelPresentation");
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
 
         if (mScene.name == "GoddyLevel")
         {
@@ -85,22 +94,25 @@ public class RaceTime : MonoBehaviour
             TutorialComplete();
 
         TimesUp();
-
     }
 
     public void TutorialComplete()
     {
-        
-        videoTut.Play();
-
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
+            videoTut.Play();
             audioCount += 1;
-            videoTut.gameObject.SetActive(false);
 
-            if (audioCount <= 1)
+            if (audioCount == 1)
             {
+                lvlPresent.gameObject.SetActive(false);
+            }
+
+            if (audioCount == 2)
+            {
+                videoTut.gameObject.SetActive(false);
                 countDownAudio.Play();
+                music.Play();
             }
         }
     }
@@ -113,13 +125,13 @@ public class RaceTime : MonoBehaviour
             {
                 countDown.gameObject.SetActive(true);
 
-                if (timeCountDown < 4f && timeCountDown > -1f)
+                if (timeCountDown < 4f && timeCountDown > 0f)
                 {
                     timeCountDown -= Time.deltaTime;
                     timerText.text = timeCountDown.ToString("0");
                     
                 }
-                if (timeCountDown < 0)
+                if (timeCountDown < 0.5f)
                 {
                     timerText.gameObject.SetActive(false);
 
@@ -131,6 +143,14 @@ public class RaceTime : MonoBehaviour
                     OnRowBots();
 
                     raceTime += Time.deltaTime;
+                }
+                if (timeCountDown < 0.5f && timeCountDown > 0f)
+                {
+                    goText.gameObject.SetActive(true);
+                }
+                else
+                {
+                    goText.gameObject.SetActive(false);
                 }
             }
         }
@@ -140,23 +160,23 @@ public class RaceTime : MonoBehaviour
             {
                 audioCount += 1;
                 lvlPresent.gameObject.SetActive(false);
-
+                
                 if (audioCount <= 1)
                 {
                     countDownAudio.Play();
+                    music.Play();
                 }
             }
 
             if (lvlPresent.activeInHierarchy == false)
             {
                 countDown.gameObject.SetActive(true);
-
-                if (timeCountDown < 4f && timeCountDown > -1f)
+                if (timeCountDown < 4f && timeCountDown > 0f)
                 {
                     timeCountDown -= Time.deltaTime;
                     timerText.text = timeCountDown.ToString("0");
                 }
-                if (timeCountDown < 0)
+                if (timeCountDown < 0.5f)
                 {
                     timerText.gameObject.SetActive(false);
 
@@ -167,6 +187,14 @@ public class RaceTime : MonoBehaviour
 
                     OnRowBots();
                     raceTime += Time.deltaTime;
+                }
+                if (timeCountDown < 0.5f && timeCountDown > 0f)
+                {
+                    goText.gameObject.SetActive(true);
+                }
+                else
+                {
+                    goText.gameObject.SetActive(false);
                 }
             }
         }
@@ -231,6 +259,7 @@ public class RaceTime : MonoBehaviour
         {
             OnEnemiesFinish();
             scoreBoard.gameObject.SetActive(true);
+            music.Stop();
         }
     }
 

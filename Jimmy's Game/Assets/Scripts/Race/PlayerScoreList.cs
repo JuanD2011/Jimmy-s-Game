@@ -78,7 +78,6 @@ public class PlayerScoreList : MonoBehaviour
                 else
                 {
                     gameOverButton.gameObject.SetActive(true);
-                   // OnGO();
                 }   
             }
         }
