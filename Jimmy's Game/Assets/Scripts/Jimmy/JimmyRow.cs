@@ -64,7 +64,7 @@ public class JimmyRow : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
-        penaltyTime = 0.1f;
+        penaltyTime = 0.025f;
         jimmyJump = GetComponent<JimmyJump>();
 
         firstAssigned = false;
@@ -76,7 +76,7 @@ public class JimmyRow : MonoBehaviour
 	
 	void Update ()
     {
-        if(canRow && !jimmyJump.OnAir && !penalty)
+        if(canRow && !penalty)
         {
             int firstKey = 0;
 
@@ -109,7 +109,15 @@ public class JimmyRow : MonoBehaviour
 
         if(canRow)
         {
-            mBody.AddForce(Vector3.forward * constForce);
+            if(!jimmyJump.OnAir)
+            {
+                mBody.AddForce(Vector3.forward * constForce);
+            }
+            if(jimmyJump.OnAir)
+            {
+                mBody.AddForce(Vector3.forward * constForce*0.75f);
+                Debug.Log("OnAir");
+            }           
         }
         
         if (penalty)
@@ -130,37 +138,76 @@ public class JimmyRow : MonoBehaviour
         {
             mAnimator.SetInteger("Row", -1);
 
-            if(!leftArrow)
+            if (!jimmyJump.OnAir)
             {
-                leftArrow = true;
-                rightArrow = false;
-                mBody.AddForce(Vector3.forward * rowMag);
-            }
-            else
-            {
-                if(leftArrow)
+                if (!leftArrow)
                 {
-                    Penalty();
+                    leftArrow = true;
+                    rightArrow = false;
+                    mBody.AddForce(Vector3.forward * rowMag);
+                }
+                else
+                {
+                    if (leftArrow)
+                    {
+                        Penalty();
+                    }
                 }
             }
+            if(jimmyJump.OnAir)
+            {
+                if (!leftArrow)
+                {
+                    leftArrow = true;
+                    rightArrow = false;
+                    mBody.AddForce(Vector3.forward * rowMag*0.25f);
+                }
+                else
+                {
+                    if (leftArrow)
+                    {
+                        Penalty();
+                    }
+                }
+            }        
         }
 
         if (Input.GetKeyDown("right"))
         {
             mAnimator.SetInteger("Row", 1);
-            if (!rightArrow)
+
+            if (!jimmyJump.OnAir)
             {
-                rightArrow = true;
-                leftArrow = false;
-                mBody.AddForce(Vector3.forward * rowMag);
-            }
-            else
-            {
-                if (rightArrow)
+                if (!rightArrow)
                 {
-                    Penalty();
+                    rightArrow = true;
+                    leftArrow = false;
+                    mBody.AddForce(Vector3.forward * rowMag);
+                }
+                else
+                {
+                    if (rightArrow)
+                    {
+                        Penalty();
+                    }
                 }
             }
+            if(jimmyJump.OnAir)
+            {
+                if (!rightArrow)
+                {
+                    rightArrow = true;
+                    leftArrow = false;
+                    mBody.AddForce(Vector3.forward * rowMag*0.25f);
+                }
+                else
+                {
+                    if (rightArrow)
+                    {
+                        Penalty();
+                    }
+                }
+            }         
         }
         /*
         if(Input.GetKeyDown("right") && Input.GetKeyDown("left"))
@@ -175,7 +222,6 @@ public class JimmyRow : MonoBehaviour
         penalty = true;
         firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
-        Debug.Log("Penalty");
     }
     
     void Finish()
@@ -223,12 +269,10 @@ public class JimmyRow : MonoBehaviour
     void Buff()
     {
         mBody.AddForce(Vector3.forward * buffMag);
-        Debug.Log("Buff");
     }
 
     void Debuff()
     {
         mBody.AddForce(-Vector3.forward * debuffMag);
-        Debug.Log("Debuff");
     }
 }

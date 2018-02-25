@@ -85,7 +85,7 @@ public class JimmyJump : MonoBehaviour
         {
             canJump = true;
             onAir = false;
-            
+
             if (mScene.name == "Hood Level 1" || mScene.name == "NationalLevel" || mScene.name == "WorldLevel")
             {
                 splashWater.Play();
