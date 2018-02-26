@@ -24,9 +24,6 @@ public class RaceTime : MonoBehaviour
     ScoreManager mScoreManager;
     GameObject scoreBoard;
 
-    //Tutorial
-    VideoPlayer videoTut;
-
     //PlayerCount
     int i = 0;
    
@@ -52,6 +49,7 @@ public class RaceTime : MonoBehaviour
 
     int audioCount = 0;
 
+
     private void Start()
     {
         mScene = SceneManager.GetActiveScene();
@@ -61,12 +59,6 @@ public class RaceTime : MonoBehaviour
         scoreBoard.gameObject.SetActive(false);
 
         lvlPresent = GameObject.Find("LevelPresentation");
-        
-
-        if (mScene.name == "Hood Level 1")
-        {
-            videoTut = GameObject.Find("VideoTutorial").GetComponent<VideoPlayer>();
-        }
 
         countDown = GameObject.Find("TextCountDown");
         countDown.gameObject.SetActive(false);
@@ -90,9 +82,6 @@ public class RaceTime : MonoBehaviour
 
     private void Update()
     {
-        if (mScene.name == "Hood Level 1")
-            TutorialComplete();
-
         TimesUp();
     }
 
@@ -100,7 +89,6 @@ public class RaceTime : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
-            videoTut.Play();
             audioCount += 1;
 
             if (audioCount == 1)
@@ -110,7 +98,6 @@ public class RaceTime : MonoBehaviour
 
             if (audioCount == 2)
             {
-                videoTut.gameObject.SetActive(false);
                 countDownAudio.Play();
                 music.Play();
             }
@@ -119,90 +106,51 @@ public class RaceTime : MonoBehaviour
 
     public void TimesUp()
     {
-        if (mScene.name == "Hood Level 1")
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
         {
-            if (videoTut.gameObject.activeInHierarchy == false)
+            audioCount += 1;
+            lvlPresent.gameObject.SetActive(false);
+
+            if (audioCount <= 1)
             {
-                countDown.gameObject.SetActive(true);
-
-                if (timeCountDown < 4f && timeCountDown > 0f)
-                {
-                    timeCountDown -= Time.deltaTime;
-                    timerText.text = timeCountDown.ToString("0");
-                    
-                }
-                if (timeCountDown < 0.5f)
-                {
-                    timerText.gameObject.SetActive(false);
-
-                    JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
-                    jimmyRow.CanRow = true;
-                    JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
-                    jimmyJump.CanJumpInit = true;
-
-                    OnRowBots();
-
-                    raceTime += Time.deltaTime;
-                }
-                if (timeCountDown < 0.5f && timeCountDown > 0f)
-                {
-                    goText.gameObject.SetActive(true);
-                }
-                else
-                {
-                    goText.gameObject.SetActive(false);
-                }
+                countDownAudio.Play();
+                music.Play();
             }
         }
-        else
+
+        if (lvlPresent.activeInHierarchy == false)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+            countDown.gameObject.SetActive(true);
+            if (timeCountDown < 4f && timeCountDown > 0f)
             {
-                audioCount += 1;
-                lvlPresent.gameObject.SetActive(false);
-                
-                if (audioCount <= 1)
-                {
-                    countDownAudio.Play();
-                    music.Play();
-                }
+                timeCountDown -= Time.deltaTime;
+                timerText.text = timeCountDown.ToString("0");
             }
-
-            if (lvlPresent.activeInHierarchy == false)
+            if (timeCountDown < 0.5f)
             {
-                countDown.gameObject.SetActive(true);
-                if (timeCountDown < 4f && timeCountDown > 0f)
-                {
-                    timeCountDown -= Time.deltaTime;
-                    timerText.text = timeCountDown.ToString("0");
-                }
-                if (timeCountDown < 0.5f)
-                {
-                    timerText.gameObject.SetActive(false);
+                timerText.gameObject.SetActive(false);
 
-                    JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
-                    jimmyRow.CanRow = true;
-                    JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
-                    jimmyJump.CanJumpInit = true;
+                JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
+                jimmyRow.CanRow = true;
+                JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
+                jimmyJump.CanJumpInit = true;
 
-                    OnRowBots();
-                    raceTime += Time.deltaTime;
-                }
-                if (timeCountDown < 0.5f && timeCountDown > 0f)
-                {
-                    goText.gameObject.SetActive(true);
-                }
-                else
-                {
-                    goText.gameObject.SetActive(false);
-                }
+                OnRowBots();
+                raceTime += Time.deltaTime;
+            }
+            if (timeCountDown < 0.5f && timeCountDown > 0f)
+            {
+                goText.gameObject.SetActive(true);
+            }
+            else
+            {
+                goText.gameObject.SetActive(false);
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        
+    {      
         GameObject collisioned = other.gameObject;
         finishing.Play();
 

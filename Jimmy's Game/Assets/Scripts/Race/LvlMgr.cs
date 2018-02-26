@@ -20,7 +20,7 @@ public class LvlMgr : MonoBehaviour
 
     public void ChangeWinLevel()
     {
-        if (mScene.name == "Hood Level 1")
+        if (mScene.name == "HoodLevel")
         {
             SceneManager.LoadScene("NationalLevel");
         }
