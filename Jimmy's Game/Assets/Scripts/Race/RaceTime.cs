@@ -25,7 +25,7 @@ public class RaceTime : MonoBehaviour
     GameObject scoreBoard;
 
     //PlayerCount
-    int i = 0;
+    int playerCount = 0;
    
     //Events 
 
@@ -41,17 +41,28 @@ public class RaceTime : MonoBehaviour
 
     //Scenes
     Scene mScene;
+    int sceneCount = 0;
+
 
     //Audio
     AudioSource countDownAudio;
     AudioSource finishing;
     AudioSource music;
+    AudioSource lose;
+    
 
     int audioCount = 0;
+
+    bool canvasGOActive = false;
+    bool wonLevel = false;
+    GameObject gameOverBg;
 
 
     private void Start()
     {
+        gameOverBg = GameObject.Find("GameOverBG");
+        gameOverBg.gameObject.SetActive(false);
+
         mScene = SceneManager.GetActiveScene();
         mScoreManager = GetComponent<ScoreManager>();
 
@@ -69,6 +80,8 @@ public class RaceTime : MonoBehaviour
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
         finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
         music = GameObject.Find("Music").GetComponent<AudioSource>();
+        lose = GameObject.Find("Lose").GetComponent<AudioSource>();
+        
 
         if (mScene.name == "GoddyLevel")
         {
@@ -78,11 +91,15 @@ public class RaceTime : MonoBehaviour
             goddyText.gameObject.SetActive(false);
         }
 
+        PlayerScoreList.OnGameOver += GameOver;
+        PlayerScoreList.OnWinLevel += WinLevel;
     }
 
     private void Update()
     {
         TimesUp();
+        AcitvateTheGOImage();
+        NextLevel();
     }
 
     public void TutorialComplete()
@@ -158,7 +175,7 @@ public class RaceTime : MonoBehaviour
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P1", "Time", sharedTime);
-            i++;
+            playerCount++;
 
             if (mScene.name == "GoddyLevel")
             {
@@ -170,7 +187,7 @@ public class RaceTime : MonoBehaviour
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
-            i++;
+            playerCount++;
             OnJimmyFinish();
 
             if (mScene.name == "GoddyLevel")
@@ -183,31 +200,91 @@ public class RaceTime : MonoBehaviour
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P2", "Time", sharedTime);
-            i++;
+            playerCount++;
         }
         if (collisioned.name == "P3")
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P3", "Time", sharedTime);
-            i++;
+            playerCount++;
         }
         if (collisioned.name == "P5")
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P5", "Time", sharedTime);
-            i++;
+            playerCount++;
         }
         if (collisioned.name == "P6")
         {
             sharedTime = raceTime;
             mScoreManager.ChangeScore("P6", "Time", sharedTime);
-            i++;
+            playerCount++;
         }
-        if (i == 6)
+        if (playerCount == 6)
         {
             OnEnemiesFinish();
             scoreBoard.gameObject.SetActive(true);
             music.Stop();
+        }
+    }
+
+    public void GameOver()
+    {
+        canvasGOActive = true;
+    }
+
+    public void WinLevel()
+    {
+        wonLevel = true;
+    }
+
+    public void AcitvateTheGOImage()
+    {
+        if (canvasGOActive == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+            {
+                sceneCount ++;
+                gameOverBg.gameObject.SetActive(true);
+                if (sceneCount == 1)
+                {
+                    lose.Play();
+                }
+                if (sceneCount == 2)
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+            }
+        }
+    }
+
+    public void NextLevel()
+    {
+        if (wonLevel == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+            {
+                if (mScene.name == "HoodLevel")
+                {
+                    SceneManager.LoadScene("NationalLevel");
+                }
+                if (mScene.name == "NationalLevel")
+                {
+                    SceneManager.LoadScene("WorldLevel");
+                }
+                if (mScene.name == "WorldLevel")
+                {
+                    SceneManager.LoadScene("Milkyway");
+                }
+                if (mScene.name == "Milkyway")
+                {
+                    SceneManager.LoadScene("GoddyLevel");
+                }
+                if (mScene.name == "GoddyLevel")
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+            }
         }
     }
 

@@ -26,8 +26,8 @@ public class JimmyRow : MonoBehaviour
     Animator mAnimator;
 
     //Audios
-
-
+    AudioSource buffSound;
+    AudioSource debuffSound;
 
     Scene mScene;
 
@@ -59,6 +59,9 @@ public class JimmyRow : MonoBehaviour
 
     void Start ()
     {
+        buffSound = GameObject.Find("BuffSound").GetComponent<AudioSource>();
+        debuffSound = GameObject.Find("DebuffSound").GetComponent<AudioSource>();
+
         mScene = SceneManager.GetActiveScene();
 
         mBody = GetComponent<Rigidbody>();
@@ -258,11 +261,13 @@ public class JimmyRow : MonoBehaviour
         {
             Buff();
             triggered.SetActive(false);
+            buffSound.Play();
         }
         if(triggered.tag == "Debuff")
         {
             Debuff();
             triggered.SetActive(false);
+            debuffSound.Play();
         }
     }
 

@@ -12,11 +12,13 @@ public class PlayerScoreList : MonoBehaviour
 
     GameObject win;
 
-    GameObject winButton;
-    GameObject gameOverButton;
-    GameObject gameOverBg;
-
     int i = 0;
+
+    public delegate void GameFinish();
+    public static event GameFinish OnGameOver;
+    public static event GameFinish OnWinLevel;
+
+    AudioSource winSound;
 
     void Start ()
     {
@@ -25,15 +27,7 @@ public class PlayerScoreList : MonoBehaviour
 
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
-
-        winButton = GameObject.Find("WinButton");
-        winButton.gameObject.SetActive(false);
-
-        gameOverButton = GameObject.Find("GameOverButton");
-        gameOverButton.gameObject.SetActive(false);
-
-        gameOverBg = GameObject.Find("GameOverBG");
-        gameOverBg.gameObject.SetActive(false);
+        winSound = GameObject.Find("WinSound").GetComponent<AudioSource>();
     }
 
     void Update ()
@@ -73,27 +67,13 @@ public class PlayerScoreList : MonoBehaviour
                 if (names[0] == "Jimmy")
                 {
                     win.gameObject.SetActive(true);
-                    winButton.gameObject.SetActive(true);
+                    OnWinLevel();
+                    winSound.Play();
                 }
                 else
                 {
-                    gameOverButton.gameObject.SetActive(true);
+                    OnGameOver();
                 }   
-            }
-        }
-    }
-
-    public void OnGO()
-    {
-        gameOverBg.gameObject.SetActive(true);
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            i++;
-            Debug.Log(i);
-            if (i == 1)
-            {
-                gameOverBg.gameObject.SetActive(false);
             }
         }
     }
