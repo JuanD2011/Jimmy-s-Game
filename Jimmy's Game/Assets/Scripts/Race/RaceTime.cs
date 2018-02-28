@@ -82,15 +82,6 @@ public class RaceTime : MonoBehaviour
         music = GameObject.Find("Music").GetComponent<AudioSource>();
         lose = GameObject.Find("Lose").GetComponent<AudioSource>();
         
-
-        if (mScene.name == "GoddyLevel")
-        {
-            goddy = GameObject.Find("P1");
-            goddyText = GameObject.Find("TextGoddy");
-
-            goddyText.gameObject.SetActive(false);
-        }
-
         PlayerScoreList.OnGameOver += GameOver;
         PlayerScoreList.OnWinLevel += WinLevel;
     }
@@ -177,11 +168,6 @@ public class RaceTime : MonoBehaviour
             mScoreManager.ChangeScore("P1", "Time", sharedTime);
             playerCount++;
 
-            if (mScene.name == "GoddyLevel")
-            {
-                SceneManager.LoadScene("Menu");
-            }
-
         }
         if (collisioned.name == "JimmyIddle")
         {
@@ -189,12 +175,6 @@ public class RaceTime : MonoBehaviour
             mScoreManager.ChangeScore("Jimmy", "Time", sharedTime);
             playerCount++;
             OnJimmyFinish();
-
-            if (mScene.name == "GoddyLevel")
-            {
-                goddy.gameObject.SetActive(false);
-                goddyText.gameObject.SetActive(true);
-            }
         }
         if (collisioned.name == "P2")
         {
@@ -277,10 +257,6 @@ public class RaceTime : MonoBehaviour
                     SceneManager.LoadScene("Milkyway");
                 }
                 if (mScene.name == "Milkyway")
-                {
-                    SceneManager.LoadScene("GoddyLevel");
-                }
-                if (mScene.name == "GoddyLevel")
                 {
                     SceneManager.LoadScene("Menu");
                 }
