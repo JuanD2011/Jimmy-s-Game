@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
 public class RaceTime : MonoBehaviour
@@ -49,7 +48,6 @@ public class RaceTime : MonoBehaviour
     AudioSource finishing;
     AudioSource music;
     AudioSource lose;
-    
 
     int audioCount = 0;
 
@@ -57,19 +55,18 @@ public class RaceTime : MonoBehaviour
     bool wonLevel = false;
     GameObject gameOverBg;
 
-
     private void Start()
     {
+        mScene = SceneManager.GetActiveScene();
+        lvlPresent = GameObject.Find("LevelPresentation");
+
         gameOverBg = GameObject.Find("GameOverBG");
         gameOverBg.gameObject.SetActive(false);
-
-        mScene = SceneManager.GetActiveScene();
+        
         mScoreManager = GetComponent<ScoreManager>();
 
         scoreBoard = GameObject.Find("CanvasScoreBoard");
         scoreBoard.gameObject.SetActive(false);
-
-        lvlPresent = GameObject.Find("LevelPresentation");
 
         countDown = GameObject.Find("TextCountDown");
         countDown.gameObject.SetActive(false);
@@ -91,25 +88,6 @@ public class RaceTime : MonoBehaviour
         TimesUp();
         AcitvateTheGOImage();
         NextLevel();
-    }
-
-    public void TutorialComplete()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
-        {
-            audioCount += 1;
-
-            if (audioCount == 1)
-            {
-                lvlPresent.gameObject.SetActive(false);
-            }
-
-            if (audioCount == 2)
-            {
-                countDownAudio.Play();
-                music.Play();
-            }
-        }
     }
 
     public void TimesUp()

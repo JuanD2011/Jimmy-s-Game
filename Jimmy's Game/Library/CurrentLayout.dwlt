@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 521}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 711, y: 471}
-  m_MaxSize: {x: 18006, y: 14021}
+  m_MinSize: {x: 713, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 2652
+  controlID: 118
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 2653
+  controlID: 36
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,8 +153,8 @@ MonoBehaviour:
     y: 0
     width: 878
     height: 470
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -179,8 +179,8 @@ MonoBehaviour:
     y: 470
     width: 878
     height: 477
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -206,10 +206,10 @@ MonoBehaviour:
     y: 0
     width: 487
     height: 947
-  m_MinSize: {x: 234, y: 471}
-  m_MaxSize: {x: 10004, y: 14021}
+  m_MinSize: {x: 234, y: 492}
+  m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 2580
+  controlID: 58
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,8 +254,8 @@ MonoBehaviour:
     y: 482
     width: 487
     height: 465
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -279,8 +279,8 @@ MonoBehaviour:
     y: 0
     width: 555
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.03611094, y: 0.65772074, z: -0.03159494, w: -0.75173247}
     speed: 2
-    m_Value: {x: -0.036110934, y: 0.65772057, z: -0.031594932, w: -0.7517323}
+    m_Value: {x: -0.036110938, y: 0.65772074, z: -0.03159494, w: -0.75173247}
   m_Size:
     m_Target: 10.799433
     speed: 2
@@ -545,13 +545,13 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\JUAN DAVID\Documents\GitHub\Jimmy\Jimmy's Game
+  m_LastProjectPath: C:\Users\Asus\Documents\GitHub\Jimmy-s-Game\Jimmy's Game
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: d62a0000
     m_LastClickedID: 10966
-    m_ExpandedIDs: 00000000e24e0000465300002a5a00004c5a00004e5c00007a5d0000f8b70000fab70000fcb70000feb7000000b8000002b8000004b8000006b8000008b800000ab800000cb800000eb8000010b8000012b8000014b8000016b8000018b800001ab800001cb800001eb8000020b8000022b8000024b8000026b8000028b800002ab800002cb800002eb8000030b8000032b8000034b8000036b80000
+    m_ExpandedIDs: 00000000e24e0000465300002a5a00004c5a00004e5c00007a5d0000c0670000c2670000c4670000c6670000c8670000ca670000cc670000ce670000d0670000d2670000d4670000d6670000d8670000da670000dc670000de670000e0670000e2670000e4670000e6670000e8670000ea670000ec670000ee670000f0670000f2670000f4670000f6670000f8670000fa670000fc670000fe670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -579,21 +579,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e24e0000465300002a5a00004c5a00004e5c00007a5d0000f8b70000fab70000fcb70000feb7000000b8000002b8000004b8000006b8000008b800000ab800000cb800000eb8000010b8000012b8000014b8000016b8000018b800001ab800001cb800001eb8000020b8000022b8000024b8000026b8000028b800002ab800002cb800002eb8000030b8000032b8000034b8000036b80000
+    m_ExpandedIDs: 00000000e24e0000245100004e5c0000c0670000c2670000c4670000c6670000c8670000ca670000cc670000ce670000d0670000d2670000d4670000d6670000d8670000da670000dc670000de670000e0670000e2670000e4670000e6670000e8670000ea670000ec670000ee670000f0670000f2670000f4670000f6670000f8670000fa670000fc670000fe670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Tutorial
+      m_OriginalName: Tutorial
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 398074
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -784,21 +784,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 2a69f4ff126af4ffea78f4ffee86f4ffc0a2f4ffeab1f4fff6b1f4ffccb4f4ff26cef4ff6af5f4ffa210f5ff9c20f5ff8421f5ff8a22f5ff8a30f5ff584cf5ff705bf5ff8e5bf5ffaa77f5ff0c96f5ffe8c1f5ff14e2f5fff68ef6ff0a9ef6ff2423f8ff5837f8ff744ef8ff9258f8ff7a59f8ff5068f8ff5076f8ff1e92f8ff44a1f8ff4ca1f8ffea04faff5227fafffe50faff0a6efaff2c8dfaffbaa0faff34ecfaff50fffaffca13fbff1e40fbff4e5dfbfff67afbff7e9bfbff74d7fbff980cfcff442afcffb644fcff5e54fcff946dfcff748cfcff64acfcff8ed3fcff0000000026a90100986703009667040074d0050046930600cc6307000a130800b42c080070be090092de0900a07f0a0024a10a00164c0b00e4071200801912005a1d1200
+    m_ExpandedIDs: 449bfbff74a4fbff4eb8fbffb8eafbff1857fcff6896fcff72bcfcff22d0fcff8ed3fcff00000000286f0700b26f0700
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: P1
-      m_OriginalName: P1
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 1179596
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 

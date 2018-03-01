@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 7119fe635ccee2a4489d172fc1d04e30
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 049b3aeaf11126f41a0a0da59741e60a
+  - enabled: 1
     path: Assets/Scenes/HoodLevel.unity
     guid: c50e9b9f32eaa2346a6352ebf387cb80
   - enabled: 1
@@ -20,6 +23,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Milkyway.unity
     guid: 69e08af901cfa3d41af51c63914a7abc
-  - enabled: 0
-    path: Assets/Scenes/GoddyLevel.unity
-    guid: 27c31a15df5926e46aa9c972ce9398d8
