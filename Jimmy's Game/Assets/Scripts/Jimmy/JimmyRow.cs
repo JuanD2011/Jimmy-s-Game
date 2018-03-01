@@ -119,7 +119,6 @@ public class JimmyRow : MonoBehaviour
             if(jimmyJump.OnAir)
             {
                 mBody.AddForce(Vector3.forward * constForce*0.75f);
-                Debug.Log("OnAir");
             }           
         }
         

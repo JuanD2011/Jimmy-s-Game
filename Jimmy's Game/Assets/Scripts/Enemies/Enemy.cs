@@ -13,11 +13,23 @@ public class Enemy : MonoBehaviour
 
     bool canRow;
 
+    float time;
+    int changeTime;
+
+    bool canChange;
+
     Animator mAnimator;
+    Rigidbody mBody;
 
 	void Start ()
     {
+        changeTime = Random.Range(1, 8);
+        Debug.Log(changeTime);
+
+        canChange = true;
+
         mAnimator = GetComponent<Animator>();
+        mBody = GetComponent<Rigidbody>();
 
         mAnimator.SetInteger("Row", 0);
 
@@ -27,20 +39,27 @@ public class Enemy : MonoBehaviour
 
         maxSpeed = Random.Range(maxSpeedmin, maxSpeedmax);
 
-        Debug.Log(maxSpeed);
         RaceTime.OnEnemiesFinish += Finish;
     }
-	
-	void Update ()
+
+    void Update()
     {
-		if(canRow)
+        if (canRow)
         {
             Row();
             mAnimator.SetInteger("Row", 1);
+            time += Time.deltaTime;
         }
-        if(!canRow)
+        if (!canRow)
         {
             mAnimator.SetInteger("Row", 0);
+        }
+
+        if ((time >= changeTime) && canRow && canChange)
+        {
+            RandomChange();
+            time = 0;
+            canChange = false;
         }
 	}
 
@@ -65,5 +84,23 @@ public class Enemy : MonoBehaviour
     void Finish()
     {
         canRow = false;
+    }
+
+    void RandomChange()
+    {
+        int change;
+        change = Random.Range(1, 3);
+        Debug.Log(change);
+
+        if(change == 1)
+        {
+            mBody.AddForce(-Vector3.forward * 200f);
+            Debug.Log("EnemyDebuff");
+        }
+        if(change == 2)
+        {
+            mBody.AddForce(Vector3.forward * 200f);
+            Debug.Log("EnemyBuff");
+        }
     }
 }

@@ -200,7 +200,7 @@ public class RaceTime : MonoBehaviour
     {
         if (canvasGOActive == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 sceneCount ++;
                 gameOverBg.gameObject.SetActive(true);
@@ -220,7 +220,7 @@ public class RaceTime : MonoBehaviour
     {
         if (wonLevel == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (mScene.name == "HoodLevel")
                 {
