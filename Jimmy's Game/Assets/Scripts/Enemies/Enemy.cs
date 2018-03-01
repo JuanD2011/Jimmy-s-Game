@@ -11,13 +11,7 @@ public class Enemy : MonoBehaviour
 
     float maxSpeed;
 
-    public float jumpMag = 200f;
-
     bool canRow;
-
-    bool onAir;
-
-    Rigidbody mBody;
 
     Animator mAnimator;
 
@@ -27,7 +21,6 @@ public class Enemy : MonoBehaviour
 
         mAnimator.SetInteger("Row", 0);
 
-        mBody = GetComponent<Rigidbody>();
         canRow = false;
 
         RaceTime.OnRowBots += CanRow;
@@ -59,61 +52,13 @@ public class Enemy : MonoBehaviour
 
     void Row()
     {
-        if(!onAir)
+        transform.Translate(Vector3.forward * curSpeed);
+
+        curSpeed += acceleration;
+
+        if (curSpeed > maxSpeed)
         {
-            transform.Translate(Vector3.forward * curSpeed);
-
-            curSpeed += acceleration;
-
-            if (curSpeed > maxSpeed)
-            {
-                curSpeed = maxSpeed;
-            }           
-        }
-        
-        if(onAir)
-        {
-            transform.Translate(Vector3.forward * curSpeed);
-
-            curSpeed -= acceleration * 0.2f;
-
-            if (curSpeed > maxSpeed)
-            {
-                curSpeed = maxSpeed;
-            }       
-        }
-        
-    }
-
-    void Jump()
-    {
-        mBody.AddForce(transform.up * jumpMag);
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        GameObject collisioned = collision.gameObject;
-
-        if(collisioned.tag == "Water")
-        {
-            onAir = true;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject collisioned = collision.gameObject;
-
-        if (collisioned.tag == "Water")
-        {
-            onAir = false;
-        }
-
-        if (collisioned.tag == "Obstacle")
-        {
-            Jump();
-            Collider triggeredCollider = collisioned.GetComponent<Collider>();
-            triggeredCollider.enabled = false;
+            curSpeed = maxSpeed;
         }
     }
 
