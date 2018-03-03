@@ -9,9 +9,11 @@ public class Menu : MonoBehaviour
     public string levelToLoad = " ";
 
 
-    public void Play()
+    private void Update()
     {
-        SceneManager.LoadScene(levelToLoad);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(levelToLoad);
+        }
     }
-
 }
