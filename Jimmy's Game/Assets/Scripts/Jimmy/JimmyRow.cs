@@ -28,6 +28,7 @@ public class JimmyRow : MonoBehaviour
     //Audios
     AudioSource buffSound;
     AudioSource debuffSound;
+    AudioSource ah;
 
     Scene mScene;
 
@@ -61,6 +62,7 @@ public class JimmyRow : MonoBehaviour
     {
         buffSound = GameObject.Find("BuffSound").GetComponent<AudioSource>();
         debuffSound = GameObject.Find("DebuffSound").GetComponent<AudioSource>();
+        ah = GameObject.Find("Ah").GetComponent<AudioSource>();
 
         mScene = SceneManager.GetActiveScene();
 
@@ -221,6 +223,7 @@ public class JimmyRow : MonoBehaviour
     
     void Penalty()
     {
+        ah.Play();
         penalty = true;
         firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
@@ -267,6 +270,7 @@ public class JimmyRow : MonoBehaviour
             Debuff();
             triggered.SetActive(false);
             debuffSound.Play();
+            ah.Play();
         }
     }
 

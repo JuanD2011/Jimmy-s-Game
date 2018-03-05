@@ -18,7 +18,7 @@ public class PlayerScoreList : MonoBehaviour
     public static event GameFinish OnGameOver;
     public static event GameFinish OnWinLevel;
 
-    AudioSource winSound;
+    
 
     void Start ()
     {
@@ -27,7 +27,6 @@ public class PlayerScoreList : MonoBehaviour
 
         scoreManager = GameObject.FindObjectOfType<ScoreManager>();
         lastChangeCounter = scoreManager.GetChangeCounter();
-        winSound = GameObject.Find("WinSound").GetComponent<AudioSource>();
     }
 
     void Update ()
@@ -68,7 +67,7 @@ public class PlayerScoreList : MonoBehaviour
                 {
                     win.gameObject.SetActive(true);
                     OnWinLevel();
-                    winSound.Play();
+                    
                 }
                 else
                 {
