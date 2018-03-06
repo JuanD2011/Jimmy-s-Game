@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 12
+  controlID: 29
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,8 +153,8 @@ MonoBehaviour:
     y: 0
     width: 878
     height: 436
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -254,8 +254,8 @@ MonoBehaviour:
     y: 482
     width: 488
     height: 465
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.03024116, y: -0.6314328, z: 0.024611467, w: 0.77447456}
     speed: 2
-    m_Value: {x: 0.030240579, y: -0.6314207, z: 0.024610994, w: 0.7744597}
+    m_Value: {x: -0.03024116, y: 0.6314328, z: -0.02461147, w: -0.77447456}
   m_Size:
     m_Target: 19.385923
     speed: 2
@@ -469,8 +469,42 @@ MonoBehaviour:
     height: 449
   m_PersistentViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
-    m_KeySerializationHelper: []
-    m_ValueSerializationHelper: []
+    m_KeySerializationHelper:
+    - {fileID: 1107212835694299258, guid: c62f862ed3427de4589a3214caba61e1, type: 2}
+    - {fileID: 1107463927128338118, guid: d05723dcab420df488e0b524c9dd5ef2, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
   m_AnimatorController: {fileID: 0}
   m_BreadCrumbs: []
@@ -528,13 +562,13 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Asus\Documents\GitHub\Jimmy-s-Game\Jimmy's Game
+  m_LastProjectPath: C:\Users\JUAN DAVID\Documents\GitHub\Jimmy-s-Game\Jimmy's Game
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: d62a0000
     m_LastClickedID: 10966
-    m_ExpandedIDs: 000000008e270000d6290000cc3100003a480000484a00007a4a000086050100880501008a0501008c0501008e05010090050100920501009405010096050100980501009a0501009c0501009e050100a0050100a2050100a4050100a6050100a8050100aa050100ac050100ae050100b0050100b2050100b4050100b6050100b8050100ba050100bc050100be050100c0050100c2050100c4050100c6050100c8050100ca050100
+    m_ExpandedIDs: 00000000dc3b00000a3e0000e44500002c4c0000d2560000ea580000f25a0000225c000056c5000058c500005ac500005cc500005ec5000060c5000062c5000064c5000066c5000068c500006ac500006cc500006ec5000070c5000072c5000074c5000076c5000078c500007ac500007cc500007ec5000080c5000082c5000084c5000086c5000088c500008ac500008cc500008ec5000090c5000092c5000094c5000096c5000098c500009ac50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -562,21 +596,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008e270000d6290000cc3100004038000010440000324600003a4800007a4a000086050100880501008a0501008c0501008e05010090050100920501009405010096050100980501009a0501009c0501009e050100a0050100a2050100a4050100a6050100a8050100aa050100ac050100ae050100b0050100b2050100b4050100b6050100b8050100ba050100bc050100be050100c0050100c2050100c4050100c6050100c8050100ca050100
+    m_ExpandedIDs: 00000000dc3b00000a3e0000e44500002c4c0000d2560000ea580000f25a0000225c000056c5000058c500005ac500005cc500005ec5000060c5000062c5000064c5000066c5000068c500006ac500006cc500006ec5000070c5000072c5000074c5000076c5000078c500007ac500007cc500007ec5000080c5000082c5000084c5000086c5000088c500008ac500008cc500008ec5000090c5000092c5000094c5000096c5000098c500009ac50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Milkyway
-      m_OriginalName: Milkyway
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 17430
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -767,26 +801,26 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: f64efcffd470fcffe690fcff96a1fcff54ccfcfff800ffff6227ffff6c47ffff8c91ffff10a2ffff9efbffff00000000ec480300b67e0300c8e803000a130400c4140500824e0c00121a0d007e930d00be4b0e00
+    m_ExpandedIDs: d8cafdffdae3fdff6622ffff446bffffe271ffff000000007a4f0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: BuffJimmyParticle
-      m_OriginalName: BuffJimmyParticle
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -225630
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 
   m_ExpandedScenes:
-  - WorldLevel
+  - HoodLevel
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting

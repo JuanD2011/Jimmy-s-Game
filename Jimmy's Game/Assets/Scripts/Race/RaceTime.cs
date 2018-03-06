@@ -34,6 +34,9 @@ public class RaceTime : MonoBehaviour
     public delegate void EnemiesFinish();
     public static event EnemiesFinish OnEnemiesFinish;
 
+    public delegate void RaceStart();
+    public static event RaceStart OnRaceStart;
+
 
     //Scenes
     Scene mScene;
@@ -52,6 +55,8 @@ public class RaceTime : MonoBehaviour
     GameObject gameOverBg;
 
     GameObject pressSpacebar;
+
+    int timesUpCount;
 
     private void Start()
     {
@@ -83,6 +88,8 @@ public class RaceTime : MonoBehaviour
         
         PlayerScoreList.OnGameOver += GameOver;
         PlayerScoreList.OnWinLevel += WinLevel;
+
+        timesUpCount = 0;
     }
 
     private void Update()
@@ -116,14 +123,16 @@ public class RaceTime : MonoBehaviour
             }
             if (timeCountDown < 0.5f)
             {
+                timesUpCount += 1;
+
                 timerText.gameObject.SetActive(false);
 
-                JimmyRow jimmyRow = GameObject.Find("JimmyIddle").GetComponent<JimmyRow>();
-                jimmyRow.CanRow = true;
-                JimmyJump jimmyJump = GameObject.Find("JimmyIddle").GetComponent<JimmyJump>();
-                jimmyJump.CanJumpInit = true;
-
-                OnRowBots();
+                if(timesUpCount == 1)
+                {
+                    OnRaceStart();
+                    OnRowBots();
+                }
+                
                 raceTime += Time.deltaTime;
             }
             if (timeCountDown < 0.5f && timeCountDown > 0f)

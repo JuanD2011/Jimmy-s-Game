@@ -24,7 +24,6 @@ public class Enemy : MonoBehaviour
 	void Start ()
     {
         changeTime = Random.Range(1, 8);
-        Debug.Log(changeTime);
 
         canChange = true;
 
@@ -90,17 +89,14 @@ public class Enemy : MonoBehaviour
     {
         int change;
         change = Random.Range(1, 3);
-        Debug.Log(change);
 
         if(change == 1)
         {
             mBody.AddForce(-Vector3.forward * 200f);
-            Debug.Log("EnemyDebuff");
         }
         if(change == 2)
         {
             mBody.AddForce(Vector3.forward * 200f);
-            Debug.Log("EnemyBuff");
         }
     }
 }

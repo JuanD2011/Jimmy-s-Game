@@ -58,6 +58,8 @@ public class JimmyJump : MonoBehaviour
         }
 
         jumpSound = GameObject.Find("Jump").GetComponent<AudioSource>();
+
+        RaceTime.OnRaceStart += RaceHasStarted;
 	}
 	
 	void Update ()
@@ -75,6 +77,11 @@ public class JimmyJump : MonoBehaviour
             mBody.AddForce(Vector3.up * jumpForce);
             //mBody.AddForce(-Vector3.forward * 150f);
         }
+    }
+
+    void RaceHasStarted()
+    {
+        canJumpInit = true;
     }
 
     private void OnCollisionEnter(Collision collision)

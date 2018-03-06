@@ -62,6 +62,14 @@ public class JimmyRow : MonoBehaviour
 
     JimmyJump jimmyJump;
 
+    /*
+    int consecutivePenalties;
+    public int maxConPenalties;
+    public float megaPenaltyCooldown;
+    float timeMegaPenalty;
+    bool megaPenalty;
+    */
+
     void Start ()
     {
         buffJimmyParticle = GameObject.Find("BuffJimmyParticle");
@@ -76,7 +84,7 @@ public class JimmyRow : MonoBehaviour
         mBody = GetComponent<Rigidbody>();
         canRow = false;
         penalty = false;
-        penaltyTime = 0.025f;
+        penaltyTime = 1.2f;
         jimmyJump = GetComponent<JimmyJump>();
 
         firstAssigned = false;
@@ -84,10 +92,14 @@ public class JimmyRow : MonoBehaviour
         mAnimator = GetComponent<Animator>();
 
         RaceTime.OnJimmyFinish += Finish;
+
+        RaceTime.OnRaceStart += RaceHasStarted;
     }
 	
 	void Update ()
     {
+
+        //Row Conditions
         if(canRow && !penalty)
         {
             int firstKey = 0;
@@ -118,8 +130,8 @@ public class JimmyRow : MonoBehaviour
             }        
         }
         
-
-        if(canRow)
+        //Constant force
+        if(canRow /*|| megaPenalty*/)
         {
             if(!jimmyJump.OnAir)
             {
@@ -131,6 +143,7 @@ public class JimmyRow : MonoBehaviour
             }           
         }
         
+        //Penalty
         if (penalty)
         {
             time += Time.deltaTime;
@@ -139,7 +152,24 @@ public class JimmyRow : MonoBehaviour
         {
             time = 0;
             penalty = false;
+            //consecutivePenalties = 0;
         }
+
+        //Mega Penalty
+        /*
+        if(megaPenalty)
+        {
+            canRow = false;
+            timeMegaPenalty += Time.deltaTime;
+        }
+        if(megaPenalty && timeMegaPenalty >= megaPenaltyCooldown)
+        {
+            megaPenalty = false;
+            consecutivePenalties = 0;
+            timeMegaPenalty = 0f;
+            canRow = true;
+        }
+        */
 
         if (getJimmyParticle == true)
         {
@@ -232,12 +262,6 @@ public class JimmyRow : MonoBehaviour
                 }
             }         
         }
-        /*
-        if(Input.GetKeyDown("right") && Input.GetKeyDown("left"))
-        {
-            Penalty();
-        }
-        */
     }
     
     void Penalty()
@@ -246,12 +270,33 @@ public class JimmyRow : MonoBehaviour
         penalty = true;
         firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
+
+        /*
+        if(penalty && time < penaltyTime && consecutivePenalties < maxConPenalties)
+        {
+            consecutivePenalties += 1;
+            Debug.Log("ConPenalties: " + consecutivePenalties);
+        }
+        else
+        {
+            if(consecutivePenalties == maxConPenalties)
+            {
+                megaPenalty = true;
+                Debug.Log("Mega Penalty");
+            }
+        }
+        */
+    }
+
+    void RaceHasStarted()
+    {
+        canRow = true;
     }
     
     void Finish()
     {
         canRow = false;
-        //mAnimator.SetInteger("Row", 0);
+        mAnimator.SetInteger("Row", 0);
     }
 
     int GetFirstKey()
