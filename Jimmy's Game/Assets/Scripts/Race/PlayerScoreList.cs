@@ -18,8 +18,6 @@ public class PlayerScoreList : MonoBehaviour
     public static event GameFinish OnGameOver;
     public static event GameFinish OnWinLevel;
 
-    
-
     void Start ()
     {
         win = GameObject.Find("WinText");

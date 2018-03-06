@@ -32,6 +32,10 @@ public class JimmyRow : MonoBehaviour
 
     Scene mScene;
 
+    GameObject buffJimmyParticle;
+    bool getJimmyParticle = false;
+    float timeParticleBuff = 0f;
+
     public bool CanRow
     {
         get
@@ -60,6 +64,9 @@ public class JimmyRow : MonoBehaviour
 
     void Start ()
     {
+        buffJimmyParticle = GameObject.Find("BuffJimmyParticle");
+        buffJimmyParticle.gameObject.SetActive(false);
+
         buffSound = GameObject.Find("BuffSound").GetComponent<AudioSource>();
         debuffSound = GameObject.Find("DebuffSound").GetComponent<AudioSource>();
         ah = GameObject.Find("Ah").GetComponent<AudioSource>();
@@ -134,6 +141,18 @@ public class JimmyRow : MonoBehaviour
             penalty = false;
         }
 
+        if (getJimmyParticle == true)
+        {
+            timeParticleBuff += Time.deltaTime;
+            buffJimmyParticle.gameObject.SetActive(true);
+
+            if (timeParticleBuff > 3)
+            {
+                buffJimmyParticle.gameObject.SetActive(false);
+                getJimmyParticle = false;
+                timeParticleBuff = 0f;
+            }
+        }
     }
 
     void Row()
@@ -264,6 +283,7 @@ public class JimmyRow : MonoBehaviour
             Buff();
             triggered.SetActive(false);
             buffSound.Play();
+            getJimmyParticle = true;
         }
         if(triggered.tag == "Debuff")
         {

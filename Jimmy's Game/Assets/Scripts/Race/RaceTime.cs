@@ -14,13 +14,7 @@ public class RaceTime : MonoBehaviour
     public float raceTime = 0f;
     public float sharedTime = 0f;
 
-    float fireWorksTime = 0f;
-    bool boolFireworks = false;
-
     GameObject lvlPresent;
-
-    GameObject goddy;
-    GameObject goddyText;
 
     //Score
     ScoreManager mScoreManager;
@@ -57,15 +51,13 @@ public class RaceTime : MonoBehaviour
     bool wonLevel = false;
     GameObject gameOverBg;
 
-    AudioSource fireworksSound;
-    GameObject fireWorks;
+    GameObject pressSpacebar;
 
     private void Start()
     {
-        fireWorks = GameObject.Find("Fireworks");
-        fireWorks.gameObject.SetActive(false);
 
-        fireworksSound = GameObject.Find("FireworksAudio").GetComponent<AudioSource>();
+        pressSpacebar = GameObject.Find("PressSpacebarToContinue");
+        pressSpacebar.gameObject.SetActive(false);
 
         mScene = SceneManager.GetActiveScene();
         lvlPresent = GameObject.Find("LevelPresentation");
@@ -98,17 +90,6 @@ public class RaceTime : MonoBehaviour
         TimesUp();
         AcitvateTheGOImage();
         NextLevel();
-
-        if (boolFireworks == true)
-        {
-            fireWorksTime += Time.deltaTime;
-            Debug.Log(fireWorksTime);
-
-            if (fireWorksTime > 3)
-            {
-                scoreBoard.gameObject.SetActive(true);
-            }
-        }
     }
 
     public void TimesUp()
@@ -202,8 +183,8 @@ public class RaceTime : MonoBehaviour
         if (playerCount == 6)
         {
             OnEnemiesFinish();
-            boolFireworks = true;
-            
+            scoreBoard.gameObject.SetActive(true);
+            pressSpacebar.gameObject.SetActive(true);
             music.Stop();
         }
     }
@@ -216,9 +197,6 @@ public class RaceTime : MonoBehaviour
     public void WinLevel()
     {
         wonLevel = true;
-        fireWorks.gameObject.SetActive(true);
-        fireworksSound.Play();
-
     }
 
     public void AcitvateTheGOImage()
