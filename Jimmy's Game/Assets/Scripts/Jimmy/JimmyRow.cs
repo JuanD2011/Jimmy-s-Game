@@ -29,6 +29,9 @@ public class JimmyRow : MonoBehaviour
     AudioSource buffSound;
     AudioSource debuffSound;
     AudioSource ah;
+    AudioSource rowLeft;
+    AudioSource rowRight;
+    AudioSource buffParticleSound;
 
     Scene mScene;
 
@@ -78,6 +81,9 @@ public class JimmyRow : MonoBehaviour
         buffSound = GameObject.Find("BuffSound").GetComponent<AudioSource>();
         debuffSound = GameObject.Find("DebuffSound").GetComponent<AudioSource>();
         ah = GameObject.Find("Ah").GetComponent<AudioSource>();
+        rowLeft = GameObject.Find("RowLeft").GetComponent<AudioSource>();
+        rowRight = GameObject.Find("RowRight").GetComponent<AudioSource>();
+        buffParticleSound = GameObject.Find("BuffParticleSound").GetComponent<AudioSource>();
 
         mScene = SceneManager.GetActiveScene();
 
@@ -199,6 +205,7 @@ public class JimmyRow : MonoBehaviour
                     leftArrow = true;
                     rightArrow = false;
                     mBody.AddForce(Vector3.forward * rowMag);
+                    rowLeft.Play();
                 }
                 else
                 {
@@ -237,6 +244,7 @@ public class JimmyRow : MonoBehaviour
                     rightArrow = true;
                     leftArrow = false;
                     mBody.AddForce(Vector3.forward * rowMag);
+                    rowRight.Play();
                 }
                 else
                 {
@@ -330,6 +338,7 @@ public class JimmyRow : MonoBehaviour
             triggered.SetActive(false);
             buffSound.Play();
             getJimmyParticle = true;
+            buffParticleSound.Play();
             timeParticleBuff = 0f;
         }
         if(triggered.tag == "Debuff")

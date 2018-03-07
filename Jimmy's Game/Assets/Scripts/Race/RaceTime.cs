@@ -60,6 +60,11 @@ public class RaceTime : MonoBehaviour
 
     private void Start()
     {
+        goText = GameObject.Find("TextGO");
+        goText.gameObject.SetActive(false);
+
+        countDown = GameObject.Find("TextCountDown");
+        countDown.gameObject.SetActive(false);
 
         pressSpacebar = GameObject.Find("PressSpacebarToContinue");
         pressSpacebar.gameObject.SetActive(false);
@@ -74,12 +79,6 @@ public class RaceTime : MonoBehaviour
 
         scoreBoard = GameObject.Find("CanvasScoreBoard");
         scoreBoard.gameObject.SetActive(false);
-
-        countDown = GameObject.Find("TextCountDown");
-        countDown.gameObject.SetActive(false);
-
-        goText = GameObject.Find("TextGO");
-        goText.gameObject.SetActive(false);
 
         countDownAudio = GameObject.Find("CountDownAudio").GetComponent<AudioSource>();
         finishing = GameObject.Find("Finishing").GetComponent<AudioSource>();
@@ -127,12 +126,12 @@ public class RaceTime : MonoBehaviour
 
                 timerText.gameObject.SetActive(false);
 
-                if(timesUpCount == 1)
+                if (timesUpCount == 1)
                 {
                     OnRaceStart();
                     OnRowBots();
                 }
-                
+
                 raceTime += Time.deltaTime;
             }
             if (timeCountDown < 0.5f && timeCountDown > 0f)
