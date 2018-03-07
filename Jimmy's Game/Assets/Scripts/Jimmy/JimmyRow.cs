@@ -174,6 +174,7 @@ public class JimmyRow : MonoBehaviour
         if (getJimmyParticle == true)
         {
             timeParticleBuff += Time.deltaTime;
+            Debug.Log(timeParticleBuff);
             buffJimmyParticle.gameObject.SetActive(true);
 
             if (timeParticleBuff > 3)
@@ -329,6 +330,7 @@ public class JimmyRow : MonoBehaviour
             triggered.SetActive(false);
             buffSound.Play();
             getJimmyParticle = true;
+            timeParticleBuff = 0f;
         }
         if(triggered.tag == "Debuff")
         {
