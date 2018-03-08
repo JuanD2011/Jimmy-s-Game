@@ -180,7 +180,6 @@ public class JimmyRow : MonoBehaviour
         if (getJimmyParticle == true)
         {
             timeParticleBuff += Time.deltaTime;
-            Debug.Log(timeParticleBuff);
             buffJimmyParticle.gameObject.SetActive(true);
 
             if (timeParticleBuff > 3)
