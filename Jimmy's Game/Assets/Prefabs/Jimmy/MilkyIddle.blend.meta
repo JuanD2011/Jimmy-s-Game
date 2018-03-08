@@ -761,6 +761,8 @@ ModelImporter:
     101506: WGT-upper_arm_L
     101508: WGT-upper_arm_R
     101510: WGT-upper_leg
+    101512: Circle
+    101514: Circle_001
     400000: belly
     400002: belly_0
     400004: body
@@ -1517,6 +1519,8 @@ ModelImporter:
     401506: WGT-upper_arm_L
     401508: WGT-upper_arm_R
     401510: WGT-upper_leg
+    401512: Circle
+    401514: Circle_001
     2100000: eye
     2100002: eye-iris
     2100004: eye-pupil
@@ -1525,6 +1529,7 @@ ModelImporter:
     2100010: mouth
     2100012: teeth
     2100014: hair-eyes__eye_hair
+    2100016: Wood
     2300000: clothes-dress_belt
     2300002: clothes_dress1
     2300004: clothes_dress2
@@ -1831,6 +1836,8 @@ ModelImporter:
     4300222: WGT-nose
     4300224: WGT-ear_L
     4300226: WGT-brow_tweak
+    4300228: Circle_001
+    4300230: Circle
     7400000: Default Take
     7400002: cookieFlexRig_proxyAction
     7400004: Lib_Characters
@@ -1855,6 +1862,8 @@ ModelImporter:
     13700030: WGT-upper_arm_L
     13700032: WGT-upper_arm_R
     13700034: WGT-upper_leg
+    13700036: Circle
+    13700038: Circle_001
   externalObjects: {}
   materials:
     importMaterials: 1

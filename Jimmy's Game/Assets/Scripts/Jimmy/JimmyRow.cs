@@ -102,7 +102,7 @@ public class JimmyRow : MonoBehaviour
         RaceTime.OnRaceStart += RaceHasStarted;
     }
 	
-	void Update ()
+	void FixedUpdate ()
     {
 
         //Row Conditions
@@ -158,6 +158,7 @@ public class JimmyRow : MonoBehaviour
         {
             time = 0;
             penalty = false;
+            mAnimator.SetInteger("Row", 0);
             //consecutivePenalties = 0;
         }
 
@@ -279,6 +280,7 @@ public class JimmyRow : MonoBehaviour
         penalty = true;
         firstAssigned = false;
         mBody.AddForce(-Vector3.forward * penaltyMag);
+        mAnimator.SetInteger("Row", 2);
 
         /*
         if(penalty && time < penaltyTime && consecutivePenalties < maxConPenalties)
@@ -305,7 +307,7 @@ public class JimmyRow : MonoBehaviour
     void Finish()
     {
         canRow = false;
-        mAnimator.SetInteger("Row", 0);
+        //mAnimator.SetInteger("Row", 0);
     }
 
     int GetFirstKey()

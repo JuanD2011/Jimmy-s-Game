@@ -62,7 +62,7 @@ public class JimmyJump : MonoBehaviour
         RaceTime.OnRaceStart += RaceHasStarted;
 	}
 	
-	void Update ()
+	void FixedUpdate ()
     {
 		if(canJump && canJumpInit)
         {
