@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Milkyway.unity
     guid: 69e08af901cfa3d41af51c63914a7abc
+  - enabled: 1
+    path: Assets/Scenes/AnimFinal.unity
+    guid: 9300af2275e850348bc5609c1faf7fb0

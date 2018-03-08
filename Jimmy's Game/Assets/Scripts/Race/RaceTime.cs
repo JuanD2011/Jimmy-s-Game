@@ -247,7 +247,7 @@ public class RaceTime : MonoBehaviour
                 }
                 if (mScene.name == "Milkyway")
                 {
-                    SceneManager.LoadScene("Menu");
+                    SceneManager.LoadScene("AnimFinal");
                 }
             }
         }
