@@ -102,7 +102,7 @@ public class JimmyRow : MonoBehaviour
         RaceTime.OnRaceStart += RaceHasStarted;
     }
 	
-	void FixedUpdate ()
+	void Update()
     {
 
         //Row Conditions
